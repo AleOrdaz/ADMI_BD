@@ -1,0 +1,103 @@
+CREATE DATABASE Proyecto;
+USE Proyecto
+
+CREATE SCHEMA Trasaccion
+CREATE SCHEMA Alamacen
+
+CREATE TABLE Almacen.Vendedor
+(
+	idVendedor BIGINT IDENTITY(1,1) NOT NULL,
+	Nombre VARCHAR(100) NOT NULL,
+	Domicilio VARCHAR(100) NOT NULL,
+	Email VARCHAR(200) NOT NULL,
+	Telefono INT NOT NULL
+	FechaNac DATE NOT NULL,
+	Edad INT,
+	CONSTRAINT PK_VENDEDOR PRIMARY KEY(idVendedor)
+)
+
+CREATE TABLE Transaccion.Cliente 
+(
+	idCliente BIGINT IDENTITY(1,1) NOT NULL,
+	Nombre VARCHAR(100) NOT NULL,
+	Domicilio VARCHAR(100) NOT NULL,
+	Email VARCHAR(200) NOT NULL,
+	Telefono INT NOT NULL
+	FechaNac DATE NOT NULL,
+	Edad INT,
+	CONSTRAINT PK_CLIENTE PRIMARY KEY(idCliente)
+)
+
+CREATE TABLE Alamacen.TipoProducto
+(
+	idTipoProducto BIGINT IDENTITY(1,1) NOT NULL,
+	Nombre VARCHAR(100) NOT NULL,
+	Descripcion VARCHAR(500),
+	CONSTRAINT PK_TIPOPRODUCTO PRIMARY KEY(idTipoProducto)
+)
+
+CREATE TABLE Almacen.Producto
+(
+	idProducto  BIGINT IDENTITY NOT NULL,
+	idTipoProducto BIGINT NOT NULL,
+	Stock INT,
+	Tamaño INT NOT NULL
+	Precio FLOAT NOT NULL,
+	CONSTRAINT PK_PRODUCTO1 PRIMARY KEY(idProducto),
+	CONSTRAINT FK_TIPOPRODUCTO FOREIGN KEY(idTipoProducto) REFERENCES Almacen.TipoProducto(idTipoProducto)
+)
+
+CREATE TABLE Transaccion.Venta 
+(
+	idVenta BIGINT IDENTITY(1,1) NOT NULL,
+	idCliente BIGINT NOT NULL,
+	idVendedor BIGINT NOT NULL,
+	Fecha DATE NOT NULL,
+	TOTAK FLOAT,
+	CONSTRAINT PK_VENTA1 PRIMARY KEY(idVenta),
+	CONSTRAINT FK_CLIENTE FOREIGN KEY(idCliente) REFERENCES Transaccion.Cliente(idCliente),
+	CONSTRAINT FK_VENDEDOR FOREIGN KEY (idVendedor) REFERENCES Almacen.Vendedor(idVendedor) 
+)
+
+CREATE TABLE Transaccion.DetalleVenta
+(
+	idVenta BIGINT NOT NULL,
+	idProducto BIGINT NOT NULL,
+	Cantidad INT NOT NULL,
+	Subtotal INT,
+	CONSTRAINT FK_VENTA2 FOREIGN KEY(idVenta) REFERENCES Transaccion.Venta(idVenta),
+	CONSTRAINT FK_PRODUCTO2 FOREIGN KEY(idProducto) REFERENCES Almacen.Producto(idProducto)
+)
+
+CREATE TABLE Alamacen.Devolucion
+ (
+	idDevolucion BIGINT IDENTITY(1,1) NOT NULL,
+	idVenta BIGINT NOT NULL,
+	Motivo VARCHAR(400) NOT NULL,
+	Fecha DATE NOT NULL,
+	Total INT,
+	CONSTRAINT PK_DEVOLUCION PRIMARY KEY(idDevolucion),
+	CONSTRAINT FK_VENTA3 FOREIGN KEY(idVenta) REFERENCES Venta.Venta(idVenta)
+ )
+
+ CREATE TABLE Alamacen.DetalleDevolucion
+ (
+	idDevolucion BIGINT NOT NULL,
+	idVenta BIGINT NOT NULL,
+	Cantidad INT NOT NULL,
+	Subtotal INT,
+	CONSTRAINT FK_DEVOLUCCION FOREIGN KEY(idDevolucion) REFERENCES Almacen.Devolucion(idDevolucion),
+	CONSTRAINT FK_VENTA4 FOREIGN KEY(idVenta) REFERENCES Transacciom.Venta(idVenta)
+ )
+
+ --Creación de Disparadores--
+CREATE TRIGGER depVentas.calculaEdad
+ON depVentas.Empleado
+AFTER INSERT 
+AS
+BEGIN
+	SET NOCOUNT ON			--Opcional, sive para no mostrar mensajes en la consola--
+	DECLARE @ID AS BIGINT
+	SELECT @ID = idEmpleado FROM inserted
+	UPDATE depVentas.Empleado set Edad = DATEDIFF(YEAR, FechaNac, GETDATE()) WHERE idEmpleado = @ID
+END
