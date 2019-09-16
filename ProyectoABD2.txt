@@ -82,11 +82,11 @@ CREATE TABLE Almacen.Devolucion
  CREATE TABLE Almacen.DetalleDevolucion
  (
 	idDevolucion BIGINT NOT NULL,
-	idVenta BIGINT NOT NULL,
+	idProducto BIGINT NOT NULL,
 	Cantidad INT NOT NULL,
 	Subtotal INT NULL,
 	CONSTRAINT FK_DEVOLUCCION FOREIGN KEY(idDevolucion) REFERENCES Almacen.Devolucion(idDevolucion),
-	CONSTRAINT FK_VENTA4 FOREIGN KEY(idVenta) REFERENCES Transaccion.Venta
+	CONSTRAINT FK_VENTA4 FOREIGN KEY(idProducto) REFERENCES Almacen.Producto
  )
  ---TRIGGERS
  --				EDAD VENDEDOR
@@ -111,7 +111,7 @@ SELECT * FROM Transaccion.Cliente
 
 CREATE TRIGGER Transaccion.calculaStock ON Transaccion.DetalleVenta AFTER INSERT AS BEGIN SET NOCOUNT ON DECLARE
 @ID AS BIGINT SELECT @ID=idVenta FROM inserted UPDATE Almacen.Producto
-SET Stock =Stock -(SELECT Cantidad FROM Transaccion.DetalleVenta WHERE idVenta=@ID) WHERE idProducto=(SELECT idProducto FROM 
+SET Stock =Stock -(SELECT Cantidad FROM Transaccion.DetalleVenta WHERE idVenta=@ID ) WHERE idProducto=(SELECT idProducto FROM 
 Transaccion.DetalleVenta WHERE idVenta=@ID)  END
 
 INSERT INTO Almacen.TipoProducto(Nombre,Descripcion) VALUES ('COLCHA REGINA','JGIJHVJHVGCGCGCGCGJCJ')
@@ -123,30 +123,38 @@ SELECT * FROM Transaccion.Venta
 SELECT * FROM Transaccion.DetalleVenta
 SELECT * FROM  Transaccion.DetalleVenta WHERE idVenta=1
 SELECT * FROM Transaccion.Cliente
-INSERT INTO Transaccion.Venta(idCliente,idVendedor,Fecha,TOTAL) VALUES(1,1,'2019-09-15',NULL)
+INSERT INTO Transaccion.Venta(idCliente,idVendedor,Fecha,TOTAL) VALUES(1,1,'2019-08-16',NULL)
 SELECT * FROM Transaccion.Venta
 SELECT * FROM Transaccion.DetalleVenta
-INSERT INTO Transaccion.DetalleVenta (idVenta,idProducto,Cantidad,Subtotal)VALUES (3,2,15,NULL)
+INSERT INTO Transaccion.DetalleVenta (idVenta,idProducto,Cantidad,Subtotal)VALUES (2,1,15,NULL)
 
-DROP TABLE 
-
+DELETE FROM Transaccion.DetalleVenta
 --		TRIGGER DE DEVOLUCION DE PRODUCTOS AUMENTO DE STOCK
 CREATE TRIGGER Almacen.RegresaProducto ON Almacen.DetalleDevolucion AFTER INSERT AS BEGIN SET NOCOUNT ON DECLARE
 @ID AS BIGINT SELECT @ID=idDevolucion FROM inserted UPDATE Almacen.Producto
-SET Stock =Stock +(SELECT Cantidad FROM Almacen.DetalleDevolucion WHERE idDevolucion=@ID) WHERE idProducto=(SELECT idProducto FROM 
+SET Stock =Stock +(SELECT Cantidad FROM Almacen.DetalleDevolucion WHERE idDevolucion=@ID ) WHERE idProducto=(SELECT idProducto FROM 
 Almacen.DetalleDevolucion WHERE idDevolucion=@ID) END
 
-INSERT INTO Almacen.Devolucion(idVenta,Motivo,Fecha,Total) VALUES (1,'mala calidad','2019-08-15',NULL)
-select * FROM Almacen.Devolucion
-SELECT *FROM Almacen.Producto
-select * FROM Almacen.DetalleDevolucion
+SELECT idProducto FROM Almacen.Producto WHERE idProducto=(SELECT idProducto FROM Transaccion.DetalleVenta  
+WHERE idVenta=(SELECT idVenta FROM Almacen.DetalleDevolucion WHERE idDevolucion=1))
+INSERT INTO Almacen.Devolucion(idVenta,Motivo,Fecha,Total) VALUES (1,'Daño en el material','2019-08-15',NULL)
+SELECT * FROM Almacen.Devolucion
+SELECT * FROM Almacen.DetalleDevolucion
 SELECT * FROM Transaccion.Venta
-
-INSERT INTO Almacen.DetalleDevolucion (idDevolucion,idVenta,Cantidad,Subtotal) VALUES (1,3,80,NULL)
+SELECT * FROM Transaccion.DetalleVenta
+SELECT *FROM Almacen.Producto
+INSERT INTO Almacen.DetalleDevolucion (idDevolucion,idProducto,Cantidad,Subtotal) VALUES (4,2,35,NULL)
 SELECT * FROM Almacen.Producto
 
 --		TRIGGER PARA SUBSTOTAL
 CREATE TRIGGER Transaccion.calculaSubtotal ON Transaccion.DetalleVenta AFTER INSERT AS BEGIN SET NOCOUNT ON DECLARE
 @ID AS BIGINT SELECT @ID=idProducto FROM inserted UPDATE Transaccion.DetalleVenta 
 SET Subtotal =Cantidad * (SELECT Precio FROM Almacen.Producto WHERE idProducto=@ID)  WHERE idProducto=(SELECT idProducto FROM 
+Almacen.Producto WHERE idProducto=@ID) END
+
+select * from Transaccion.Venta
+
+CREATE TRIGGER Almacen.calculaSubtotal ON Almacen.DetalleDevolucion AFTER INSERT AS BEGIN SET NOCOUNT ON DECLARE
+@ID AS BIGINT SELECT @ID=idProducto FROM inserted UPDATE Almacen.DetalleDevolucion 
+SET Subtotal =Cantidad * (SELECT Precio FROM Almacen.Producto WHERE idProducto=@ID)  WHERE idDevolucion=(SELECT idProducto FROM 
 Almacen.Producto WHERE idProducto=@ID) END
