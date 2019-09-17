@@ -32,18 +32,22 @@
             this.Productos = new System.Windows.Forms.ToolStripMenuItem();
             this.Venta = new System.Windows.Forms.ToolStripMenuItem();
             this.Devolucion = new System.Windows.Forms.ToolStripMenuItem();
+            this.clienteToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.vendedores = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
             // menuStrip1
             // 
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.vendedores,
+            this.clienteToolStripMenuItem,
             this.Productos,
             this.Venta,
             this.Devolucion});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(544, 24);
+            this.menuStrip1.Size = new System.Drawing.Size(612, 24);
             this.menuStrip1.TabIndex = 0;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -68,12 +72,26 @@
             this.Devolucion.Text = "Devolucion";
             this.Devolucion.Click += new System.EventHandler(this.Devolucion_Click);
             // 
+            // clienteToolStripMenuItem
+            // 
+            this.clienteToolStripMenuItem.Name = "clienteToolStripMenuItem";
+            this.clienteToolStripMenuItem.Size = new System.Drawing.Size(56, 20);
+            this.clienteToolStripMenuItem.Text = "Cliente";
+            this.clienteToolStripMenuItem.Click += new System.EventHandler(this.clienteToolStripMenuItem_Click);
+            // 
+            // vendedores
+            // 
+            this.vendedores.Name = "vendedores";
+            this.vendedores.Size = new System.Drawing.Size(69, 20);
+            this.vendedores.Text = "Vendedor";
+            this.vendedores.Click += new System.EventHandler(this.vendedores_Click);
+            // 
             // Vianney
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.Thistle;
-            this.ClientSize = new System.Drawing.Size(544, 304);
+            this.ClientSize = new System.Drawing.Size(612, 371);
             this.Controls.Add(this.menuStrip1);
             this.MainMenuStrip = this.menuStrip1;
             this.Name = "Vianney";
@@ -92,6 +110,8 @@
         private System.Windows.Forms.ToolStripMenuItem Productos;
         private System.Windows.Forms.ToolStripMenuItem Venta;
         private System.Windows.Forms.ToolStripMenuItem Devolucion;
+        private System.Windows.Forms.ToolStripMenuItem clienteToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem vendedores;
     }
 }
 

@@ -11,3 +11,5 @@ C:\Users\Maria\OneDrive\Escritorio\Administracion de BD\VianneySQL\VianneySQL\ob
 C:\Users\Maria\OneDrive\Escritorio\Administracion de BD\VianneySQL\VianneySQL\obj\Debug\VianneySQL.exe
 C:\Users\Maria\OneDrive\Escritorio\Administracion de BD\VianneySQL\VianneySQL\obj\Debug\VianneySQL.pdb
 C:\Users\Maria\OneDrive\Escritorio\Administracion de BD\VianneySQL\VianneySQL\obj\Debug\VianneySQL.Ventas.resources
+C:\Users\Maria\OneDrive\Escritorio\Administracion de BD\VianneySQL\VianneySQL\obj\Debug\VianneySQL.Clientes.resources
+C:\Users\Maria\OneDrive\Escritorio\Administracion de BD\VianneySQL\VianneySQL\obj\Debug\VianneySQL.Vendedores.resources
