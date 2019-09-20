@@ -43,7 +43,7 @@ namespace VianneySQL
         /**Llamado de las ventas**/
         private void Productos_Click(object sender, EventArgs e)
         {
-            Productos producto = new Productos(conexion);
+            Productos1 producto = new Productos1(conexion);
             producto.Show();
         }
 

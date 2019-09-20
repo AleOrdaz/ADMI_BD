@@ -42,40 +42,46 @@ namespace VianneySQL
 
         private void Agregar_Click(object sender, EventArgs e)
         {
-            string query = "INSERT INTO Almacen.Producto(Stock, Tamaño, Precio) VALUES (@Stock, @Tamaño, @Precio)";
+            string query = "INSERT INTO Almacen.TipoProducto(Nombre, Descripcion) VALUES (@Nombre, @Descripcion)";
             SqlCommand comando = new SqlCommand(query, conexion2);
-            comando.Parameters.AddWithValue("@Stock", Stock.Text);
-            comando.Parameters.AddWithValue("@Tamaño", Tamaño.Text);
-            comando.Parameters.AddWithValue("@Precio", Precio.Text);
+            comando.Parameters.AddWithValue("@Nombre", Nombre.Text);
+            comando.Parameters.AddWithValue("@Descripcion", Descripcion.Text);
 
-            string query2 = "INSERT INTO Almacen.TipoProducto(Nombre, Descripcion) VALUES (@Nombre, @Descripcion)";
+            string query4 = "SELECT idTipoProducto FROM Almacen.TipoProducto WHERE Nombre = '" + Nombre.Text + "' AND Descripcion ='" + Descripcion.Text + "'";
+            SqlCommand comando4 = new SqlCommand(query4, conexion2);
+            SqlDataAdapter adapatador1 = new SqlDataAdapter(comando4);
+            int id = Convert.ToInt32(comando4.ExecuteScalar());
+            MessageBox.Show(id.ToString());
+            string query2 = "INSERT INTO Almacen.Producto(Stock, Tamaño, Precio) VALUES (@Stock, @Tamaño, @Precio)";
             SqlCommand comando2 = new SqlCommand(query2, conexion2);
-            comando2.Parameters.AddWithValue("@Nombre", Nombre.Text);
-            comando2.Parameters.AddWithValue("@Descripcion", Descripcion.Text);
+            comando2.Parameters.AddWithValue("@Stock", Stock.Text);
+            comando2.Parameters.AddWithValue("@Tamaño", Tamaño.Text);
+            comando2.Parameters.AddWithValue("@Precio", Precio.Text);
 
             try
             {
                 comando.ExecuteNonQuery();
-                // MessageBox.Show("Ingresado con Exito");
+                comando2.ExecuteNonQuery();
             }
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
             }
 
-            string query1 = "SELECT * FROM Almacen.Producto";
-            SqlCommand comando3 = new SqlCommand(query1, conexion2);
-            SqlDataAdapter adapatador = new SqlDataAdapter(comando2);
+            string query3 = "SELECT * FROM Almacen.TipoProducto";
+            SqlCommand comando3 = new SqlCommand(query3, conexion2);
+            SqlDataAdapter adapatador3 = new SqlDataAdapter(comando3);
+            DataTable tabla1 = new DataTable();
+            adapatador3.Fill(tabla1);
+            dataGridView1.DataSource = tabla1;
+
+            string query5 = "SELECT * FROM Almacen.Producto";
+            SqlCommand comando5 = new SqlCommand(query5, conexion2);
+            SqlDataAdapter adapatador = new SqlDataAdapter(comando5);
             DataTable tabla = new DataTable();
             adapatador.Fill(tabla);
-            dataGridView1.DataSource = tabla;
+            dataGridView2.DataSource = tabla;
 
-            string query4 = "SELECT * FROM Almacen.TipoProducto";
-            SqlCommand comando4 = new SqlCommand(query4, conexion2);
-            SqlDataAdapter adapatador1 = new SqlDataAdapter(comando2);
-            DataTable tabla2 = new DataTable();
-            adapatador.Fill(tabla2);
-            dataGridView1.DataSource = tabla2;
         }
 
         private void Modificar_Click(object sender, EventArgs e)
