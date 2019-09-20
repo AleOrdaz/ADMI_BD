@@ -69,6 +69,7 @@
             this.Agregar.TabIndex = 28;
             this.Agregar.Text = "Agregar";
             this.Agregar.UseVisualStyleBackColor = true;
+            this.Agregar.Click += new System.EventHandler(this.Agregar_Click);
             // 
             // Descripcion
             // 
@@ -115,6 +116,7 @@
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.Size = new System.Drawing.Size(518, 168);
             this.dataGridView1.TabIndex = 17;
+            this.dataGridView1.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellContentClick);
             // 
             // Siguiente
             // 

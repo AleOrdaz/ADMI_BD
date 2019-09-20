@@ -41,8 +41,6 @@
             this.label1 = new System.Windows.Forms.Label();
             this.Telefono = new System.Windows.Forms.TextBox();
             this.label6 = new System.Windows.Forms.Label();
-            this.Edad = new System.Windows.Forms.TextBox();
-            this.label7 = new System.Windows.Forms.Label();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.SuspendLayout();
@@ -56,6 +54,7 @@
             this.Eliminar.TabIndex = 28;
             this.Eliminar.Text = "Eliminar";
             this.Eliminar.UseVisualStyleBackColor = true;
+            this.Eliminar.Click += new System.EventHandler(this.Eliminar_Click);
             // 
             // Modificar
             // 
@@ -66,6 +65,7 @@
             this.Modificar.TabIndex = 27;
             this.Modificar.Text = "Modificar";
             this.Modificar.UseVisualStyleBackColor = true;
+            this.Modificar.Click += new System.EventHandler(this.Modificar_Click);
             // 
             // Agregar
             // 
@@ -76,11 +76,12 @@
             this.Agregar.TabIndex = 26;
             this.Agregar.Text = "Agregar";
             this.Agregar.UseVisualStyleBackColor = true;
+            this.Agregar.Click += new System.EventHandler(this.Agregar_Click);
             // 
             // Domicilio
             // 
             this.Domicilio.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.Domicilio.Location = new System.Drawing.Point(255, 112);
+            this.Domicilio.Location = new System.Drawing.Point(255, 50);
             this.Domicilio.Name = "Domicilio";
             this.Domicilio.Size = new System.Drawing.Size(360, 21);
             this.Domicilio.TabIndex = 24;
@@ -96,7 +97,7 @@
             // FechaNac
             // 
             this.FechaNac.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.FechaNac.Location = new System.Drawing.Point(255, 51);
+            this.FechaNac.Location = new System.Drawing.Point(255, 114);
             this.FechaNac.Name = "FechaNac";
             this.FechaNac.Size = new System.Drawing.Size(360, 21);
             this.FechaNac.TabIndex = 22;
@@ -113,7 +114,7 @@
             // 
             this.label4.AutoSize = true;
             this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label4.Location = new System.Drawing.Point(142, 115);
+            this.label4.Location = new System.Drawing.Point(142, 53);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(59, 15);
             this.label4.TabIndex = 19;
@@ -133,7 +134,7 @@
             // 
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.Location = new System.Drawing.Point(142, 51);
+            this.label2.Location = new System.Drawing.Point(142, 114);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(107, 15);
             this.label2.TabIndex = 17;
@@ -167,31 +168,14 @@
             this.label6.TabIndex = 29;
             this.label6.Text = "Telefono";
             // 
-            // Edad
-            // 
-            this.Edad.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.Edad.Location = new System.Drawing.Point(538, 145);
-            this.Edad.Name = "Edad";
-            this.Edad.Size = new System.Drawing.Size(77, 21);
-            this.Edad.TabIndex = 32;
-            // 
-            // label7
-            // 
-            this.label7.AutoSize = true;
-            this.label7.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label7.Location = new System.Drawing.Point(482, 148);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(36, 15);
-            this.label7.TabIndex = 31;
-            this.label7.Text = "Edad";
-            // 
             // dataGridView1
             // 
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Location = new System.Drawing.Point(34, 211);
+            this.dataGridView1.Location = new System.Drawing.Point(28, 211);
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.Size = new System.Drawing.Size(708, 199);
             this.dataGridView1.TabIndex = 33;
+            this.dataGridView1.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellContentClick);
             // 
             // Vendedores
             // 
@@ -200,8 +184,6 @@
             this.BackColor = System.Drawing.Color.Thistle;
             this.ClientSize = new System.Drawing.Size(768, 422);
             this.Controls.Add(this.dataGridView1);
-            this.Controls.Add(this.Edad);
-            this.Controls.Add(this.label7);
             this.Controls.Add(this.Telefono);
             this.Controls.Add(this.label6);
             this.Controls.Add(this.Eliminar);
@@ -239,8 +221,6 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.TextBox Telefono;
         private System.Windows.Forms.Label label6;
-        private System.Windows.Forms.TextBox Edad;
-        private System.Windows.Forms.Label label7;
         private System.Windows.Forms.DataGridView dataGridView1;
     }
 }

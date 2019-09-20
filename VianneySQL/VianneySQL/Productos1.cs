@@ -19,6 +19,12 @@ namespace VianneySQL
         {
             InitializeComponent();
             conexion2 = conexion;
+            string query2 = "SELECT * FROM Almacen.TipoProducto";
+            SqlCommand comando2 = new SqlCommand(query2, conexion);
+            SqlDataAdapter adapatador = new SqlDataAdapter(comando2);
+            DataTable tabla = new DataTable();
+            adapatador.Fill(tabla);
+            dataGridView1.DataSource = tabla;
         }
 
         //Para seguir dando de alta de productos
@@ -26,6 +32,37 @@ namespace VianneySQL
         {
             Productos producto = new Productos(conexion2);
             producto.Show();
+        }
+
+        //Agregar producto 
+        private void Agregar_Click(object sender, EventArgs e)
+        {
+            string query = "INSERT INTO Almacen.TipoProducto(Nombre, Descripcion) VALUES (@Nombre, @Descripcion)";
+            SqlCommand comando = new SqlCommand(query, conexion2);
+            comando.Parameters.AddWithValue("@Nombre", Nombre.Text);
+            comando.Parameters.AddWithValue("@Descripcion", Descripcion.Text);
+
+            try
+            {
+                comando.ExecuteNonQuery();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+
+            string query2 = "SELECT * FROM Almacen.TipoProducto";
+            SqlCommand comando2 = new SqlCommand(query2, conexion2);
+            SqlDataAdapter adapatador = new SqlDataAdapter(comando2);
+            DataTable tabla = new DataTable();
+            adapatador.Fill(tabla);
+            dataGridView1.DataSource = tabla;
+        }
+
+        private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+            Nombre.Text = dataGridView1.Rows[dataGridView1.CurrentCell.RowIndex].Cells[1].Value.ToString();
+            Descripcion.Text = dataGridView1.Rows[dataGridView1.CurrentCell.RowIndex].Cells[2].Value.ToString();
         }
     }
 }

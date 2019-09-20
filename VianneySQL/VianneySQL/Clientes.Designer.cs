@@ -29,8 +29,6 @@
         private void InitializeComponent()
         {
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
-            this.Edad = new System.Windows.Forms.TextBox();
-            this.label7 = new System.Windows.Forms.Label();
             this.Telefono = new System.Windows.Forms.TextBox();
             this.label6 = new System.Windows.Forms.Label();
             this.Eliminar = new System.Windows.Forms.Button();
@@ -50,28 +48,11 @@
             // dataGridView1
             // 
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Location = new System.Drawing.Point(33, 211);
+            this.dataGridView1.Location = new System.Drawing.Point(21, 211);
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.Size = new System.Drawing.Size(708, 199);
             this.dataGridView1.TabIndex = 49;
-            // 
-            // Edad
-            // 
-            this.Edad.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.Edad.Location = new System.Drawing.Point(527, 145);
-            this.Edad.Name = "Edad";
-            this.Edad.Size = new System.Drawing.Size(77, 21);
-            this.Edad.TabIndex = 48;
-            // 
-            // label7
-            // 
-            this.label7.AutoSize = true;
-            this.label7.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label7.Location = new System.Drawing.Point(471, 148);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(36, 15);
-            this.label7.TabIndex = 47;
-            this.label7.Text = "Edad";
+            this.dataGridView1.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellContentClick);
             // 
             // Telefono
             // 
@@ -100,6 +81,7 @@
             this.Eliminar.TabIndex = 44;
             this.Eliminar.Text = "Eliminar";
             this.Eliminar.UseVisualStyleBackColor = true;
+            this.Eliminar.Click += new System.EventHandler(this.Eliminar_Click);
             // 
             // Modificar
             // 
@@ -110,6 +92,7 @@
             this.Modificar.TabIndex = 43;
             this.Modificar.Text = "Modificar";
             this.Modificar.UseVisualStyleBackColor = true;
+            this.Modificar.Click += new System.EventHandler(this.Modificar_Click);
             // 
             // Agregar
             // 
@@ -120,11 +103,12 @@
             this.Agregar.TabIndex = 42;
             this.Agregar.Text = "Agregar";
             this.Agregar.UseVisualStyleBackColor = true;
+            this.Agregar.Click += new System.EventHandler(this.Agregar_Click);
             // 
             // Domicilio
             // 
             this.Domicilio.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.Domicilio.Location = new System.Drawing.Point(244, 112);
+            this.Domicilio.Location = new System.Drawing.Point(244, 51);
             this.Domicilio.Name = "Domicilio";
             this.Domicilio.Size = new System.Drawing.Size(360, 21);
             this.Domicilio.TabIndex = 41;
@@ -140,7 +124,7 @@
             // FechaNac
             // 
             this.FechaNac.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.FechaNac.Location = new System.Drawing.Point(244, 51);
+            this.FechaNac.Location = new System.Drawing.Point(244, 115);
             this.FechaNac.Name = "FechaNac";
             this.FechaNac.Size = new System.Drawing.Size(360, 21);
             this.FechaNac.TabIndex = 39;
@@ -157,7 +141,7 @@
             // 
             this.label4.AutoSize = true;
             this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label4.Location = new System.Drawing.Point(131, 115);
+            this.label4.Location = new System.Drawing.Point(131, 54);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(59, 15);
             this.label4.TabIndex = 37;
@@ -177,7 +161,7 @@
             // 
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.Location = new System.Drawing.Point(131, 51);
+            this.label2.Location = new System.Drawing.Point(131, 115);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(107, 15);
             this.label2.TabIndex = 35;
@@ -200,8 +184,6 @@
             this.BackColor = System.Drawing.Color.Thistle;
             this.ClientSize = new System.Drawing.Size(768, 422);
             this.Controls.Add(this.dataGridView1);
-            this.Controls.Add(this.Edad);
-            this.Controls.Add(this.label7);
             this.Controls.Add(this.Telefono);
             this.Controls.Add(this.label6);
             this.Controls.Add(this.Eliminar);
@@ -227,8 +209,6 @@
         #endregion
 
         private System.Windows.Forms.DataGridView dataGridView1;
-        private System.Windows.Forms.TextBox Edad;
-        private System.Windows.Forms.Label label7;
         private System.Windows.Forms.TextBox Telefono;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Button Eliminar;

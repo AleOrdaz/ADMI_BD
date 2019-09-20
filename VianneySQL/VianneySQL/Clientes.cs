@@ -19,7 +19,93 @@ namespace VianneySQL
         {
             InitializeComponent();
             conexion2 = conexion;
-            MessageBox.Show("Exito");
+            Datos();
+        }
+
+        //Muestra los Datos en el dataGrid 
+        private void Datos()
+        {
+            string query = "SELECT * FROM Transaccion.Cliente";
+            SqlCommand comando = new SqlCommand(query, conexion2);
+            SqlDataAdapter adapatador = new SqlDataAdapter(comando);
+            DataTable tabla = new DataTable();
+            adapatador.Fill(tabla);
+            dataGridView1.DataSource = tabla;
+        }
+
+        //Agrega a un nuevo Cliente
+        private void Agregar_Click(object sender, EventArgs e)
+        {
+            string query = "INSERT INTO Transaccion.Cliente(Nombre, Domicilio, Email, Telefono, FechaNac) VALUES (@Nombre, @Domicilio, @Email, @Telefono, @FechaNac)";
+            SqlCommand comando = new SqlCommand(query, conexion2);
+            comando.Parameters.AddWithValue("@Nombre", Nombre.Text);
+            comando.Parameters.AddWithValue("@Domicilio", Domicilio.Text);
+            comando.Parameters.AddWithValue("@Email", Email.Text);
+            comando.Parameters.AddWithValue("@Telefono", Telefono.Text);
+            comando.Parameters.AddWithValue("@FechaNac", FechaNac.Text);
+
+            try
+            {
+                comando.ExecuteNonQuery();
+                MessageBox.Show("Ingresado con Exito");
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+            Datos();
+        }
+
+        //Modifica los datos de un Cliente
+        private void Modificar_Click(object sender, EventArgs e)
+        {
+            string query = "UPDATE Transaccion.Cliente SET Nombre = '" + Nombre.Text +
+                                                  "', Domicilio = '" + Domicilio.Text +
+                                                  "', Email = '" + Email.Text +
+                                                  "', Telefono = '" + Telefono.Text +
+                                                  "', FechaNac = '" + FechaNac.Text + "'" +
+            "WHERE idCliente = " + dataGridView1.Rows[dataGridView1.CurrentCell.RowIndex].Cells[0].Value.ToString();
+            SqlCommand comando = new SqlCommand(query, conexion2);
+
+            try
+            {
+                comando.ExecuteNonQuery();
+                Datos();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+
+        }
+
+        //Elimina los datos de un cliente
+        private void Eliminar_Click(object sender, EventArgs e)
+        {
+            string query = "DELETE FROM Transaccion.Cliente WHERE idCliente ="
+        + dataGridView1.Rows[dataGridView1.CurrentCell.RowIndex].Cells[0].Value.ToString();
+            SqlCommand comando = new SqlCommand(query, conexion2);
+
+            try
+            {
+                comando.ExecuteNonQuery();
+                Datos();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+
+        }
+
+        //al seleccionar el nombre me da los datos el los texbox
+        private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+            Nombre.Text = dataGridView1.Rows[dataGridView1.CurrentCell.RowIndex].Cells[1].Value.ToString();
+            Domicilio.Text = dataGridView1.Rows[dataGridView1.CurrentCell.RowIndex].Cells[2].Value.ToString();
+            Email.Text = dataGridView1.Rows[dataGridView1.CurrentCell.RowIndex].Cells[3].Value.ToString();
+            Telefono.Text = dataGridView1.Rows[dataGridView1.CurrentCell.RowIndex].Cells[4].Value.ToString();
+            FechaNac.Text = dataGridView1.Rows[dataGridView1.CurrentCell.RowIndex].Cells[5].Value.ToString();
         }
     }
 }
