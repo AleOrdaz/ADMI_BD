@@ -47,7 +47,7 @@ namespace VianneySQL
             try
             {
                 comando.ExecuteNonQuery();
-                MessageBox.Show("Ingresado con Exito");
+                //MessageBox.Show("Ingresado con Exito");
             }
             catch (Exception ex)
             {
@@ -64,17 +64,23 @@ namespace VianneySQL
                                                   "', Email = '" + Email.Text +
                                                   "', Telefono = '" + Telefono.Text +
                                                   "', FechaNac = '" + FechaNac.Text + "'" +
-            "WHERE idCliente = " + dataGridView1.Rows[dataGridView1.CurrentCell.RowIndex].Cells[0].Value.ToString();
+            "WHERE IdCliente = " + dataGridView1.Rows[dataGridView1.CurrentCell.RowIndex].Cells[0].Value.ToString();
             SqlCommand comando = new SqlCommand(query, conexion2);
 
             try
             {
                 comando.ExecuteNonQuery();
                 Datos();
+                Nombre.Text = "";
+                Domicilio.Text = "";
+                Email.Text = "";
+                Telefono.Text = "";
+                FechaNac.Text = "";
+                Agregar.Enabled = true;
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message);
+                MessageBox.Show("Eliminar la hora en Fecha de nacimiento");
             }
 
         }
@@ -82,14 +88,20 @@ namespace VianneySQL
         //Elimina los datos de un cliente
         private void Eliminar_Click(object sender, EventArgs e)
         {
-            string query = "DELETE FROM Transaccion.Cliente WHERE idCliente ="
-        + dataGridView1.Rows[dataGridView1.CurrentCell.RowIndex].Cells[0].Value.ToString();
+            string query = "DELETE FROM Transaccion.Cliente" +
+                           " WHERE IdCliente =" + dataGridView1.Rows[dataGridView1.CurrentCell.RowIndex].Cells[0].Value.ToString();
             SqlCommand comando = new SqlCommand(query, conexion2);
 
             try
             {
                 comando.ExecuteNonQuery();
                 Datos();
+                Nombre.Text = "";
+                Domicilio.Text = "";
+                Email.Text = "";
+                Telefono.Text = "";
+                FechaNac.Text = "";
+                Agregar.Enabled = true;
             }
             catch (Exception ex)
             {
@@ -106,6 +118,7 @@ namespace VianneySQL
             Email.Text = dataGridView1.Rows[dataGridView1.CurrentCell.RowIndex].Cells[3].Value.ToString();
             Telefono.Text = dataGridView1.Rows[dataGridView1.CurrentCell.RowIndex].Cells[4].Value.ToString();
             FechaNac.Text = dataGridView1.Rows[dataGridView1.CurrentCell.RowIndex].Cells[5].Value.ToString();
+            Agregar.Enabled = false;
         }
     }
 }

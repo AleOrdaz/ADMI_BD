@@ -25,14 +25,14 @@ namespace VianneySQL
         /**Llamado de las ventas**/
         private void Producto_Click(object sender, EventArgs e)
         {
-            Productos producto = new Productos(conexion2);
-            producto.Show();
+           // Productos producto = new Productos(conexion2);
+            //producto.Show();
         }
 
         private void Venta_Click(object sender, EventArgs e)
         {
-            Ventas venta = new Ventas(conexion2);
-            venta.Show();
+            //Ventas venta = new Ventas(conexion2);
+            //venta.Show();
         }
     }
 }
