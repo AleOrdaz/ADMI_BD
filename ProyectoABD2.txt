@@ -74,17 +74,18 @@ CREATE TABLE Almacen.Devolucion
 	idVenta BIGINT NOT NULL,
 	Motivo VARCHAR(400) NOT NULL,
 	Fecha DATE NOT NULL,
-	Total INT NULL,
+	Total FLOAT NULL,
 	CONSTRAINT PK_DEVOLUCION PRIMARY KEY(idDevolucion),
 	CONSTRAINT FK_VENTA3 FOREIGN KEY(idVenta) REFERENCES Transaccion.Venta(idVenta)
  )
+
 
  CREATE TABLE Almacen.DetalleDevolucion
  (
 	idDevolucion BIGINT NOT NULL,
 	idProducto BIGINT NOT NULL,
 	Cantidad INT NOT NULL,
-	Subtotal INT NULL,
+	Subtotal FLOAT NULL,
 	CONSTRAINT FK_DEVOLUCCION FOREIGN KEY(idDevolucion) REFERENCES Almacen.Devolucion(idDevolucion),
 	CONSTRAINT FK_VENTA4 FOREIGN KEY(idProducto) REFERENCES Almacen.Producto
  )
@@ -98,42 +99,95 @@ CREATE TRIGGER Transaccion.calculaEdad ON Transaccion.Cliente AFTER INSERT AS BE
 @ID AS BIGINT SELECT @ID=idCliente FROM inserted UPDATE Transaccion.Cliente
 SET Edad = CAST(DATEDIFF(dd,FechaNac,GETDATE()) / 365.25 as int) WHERE idCliente=@ID END
 
-INSERT INTO Almacen.Vendedor(Nombre,Domicilio,Email,Telefono,FechaNac,Edad)VALUES ('Diego','B. Anaya','diego_pilcar@hotmail.com',
-'866-132-62-79','1996-10-03',NULL)
-INSERT INTO Almacen.Vendedor(Nombre,Domicilio,Email,Telefono,FechaNac,Edad)VALUES ('Aldo','B. Anaya','aldopilcar@hotmail.com',
-'866-123-45-78','1999-08-23',NULL)
-INSERT INTO Transaccion.Cliente(Nombre,Domicilio,Email,Telefono,FechaNac,Edad)VALUES ('Jose','Roma','hotmail@hotmail.com',
-'123-456-78-90','1996-08-03',NULL)
-SELECT * FROM Almacen.Vendedor
-SELECT * FROM Transaccion.Cliente
-
 --Triger de ventas de productos descontar stock 
 
 CREATE TRIGGER Transaccion.calculaStock ON Transaccion.DetalleVenta AFTER INSERT AS BEGIN SET NOCOUNT ON DECLARE
 @ID AS BIGINT SELECT @ID=idVenta FROM inserted UPDATE Almacen.Producto
 SET Stock =Stock -(SELECT Cantidad FROM Transaccion.DetalleVenta WHERE idVenta=@ID ) WHERE idProducto=(SELECT idProducto FROM 
 Transaccion.DetalleVenta WHERE idVenta=@ID)  END
-
-INSERT INTO Almacen.TipoProducto(Nombre,Descripcion) VALUES ('COLCHA REGINA','JGIJHVJHVGCGCGCGCGJCJ')
-SELECT * FROM Almacen.TipoProducto
-INSERT INTO Almacen.Producto (idTipoProducto,Stock,Tamaño,Precio) VALUES(1,50,'MATRIMONIAL',18.45)
-INSERT INTO Almacen.Producto (idTipoProducto,Stock,Tamaño,Precio) VALUES(1,50,'INDIVIDUAL',20.50)
-SELECT * FROM Almacen.Producto
-SELECT * FROM Transaccion.Venta
-SELECT * FROM Transaccion.DetalleVenta
-SELECT * FROM  Transaccion.DetalleVenta WHERE idVenta=1
-SELECT * FROM Transaccion.Cliente
-INSERT INTO Transaccion.Venta(idCliente,idVendedor,Fecha,TOTAL) VALUES(1,1,'2019-08-16',NULL)
-SELECT * FROM Transaccion.Venta
-SELECT * FROM Transaccion.DetalleVenta
-INSERT INTO Transaccion.DetalleVenta (idVenta,idProducto,Cantidad,Subtotal)VALUES (2,1,15,NULL)
-
-DELETE FROM Transaccion.DetalleVenta
 --		TRIGGER DE DEVOLUCION DE PRODUCTOS AUMENTO DE STOCK
 CREATE TRIGGER Almacen.RegresaProducto ON Almacen.DetalleDevolucion AFTER INSERT AS BEGIN SET NOCOUNT ON DECLARE
 @ID AS BIGINT SELECT @ID=idDevolucion FROM inserted UPDATE Almacen.Producto
 SET Stock =Stock +(SELECT Cantidad FROM Almacen.DetalleDevolucion WHERE idDevolucion=@ID ) WHERE idProducto=(SELECT idProducto FROM 
 Almacen.DetalleDevolucion WHERE idDevolucion=@ID) END
+
+--		TRIGGER PARA SUBSTOTAL
+CREATE TRIGGER Transaccion.calculaSubtotal ON Transaccion.DetalleVenta FOR INSERT
+AS
+	DECLARE @IDPRODUCTO BIGINT
+	DECLARE @IDVENTA BIGINT
+	DECLARE @CANTIDAD  INT
+	DECLARE @SUBTOTAL FLOAT
+	DECLARE @PRECIO FLOAT
+	DECLARE @SUMASUBT FLOAT
+
+	SELECT @IDPRODUCTO=idProducto,@IDVENTA=idVenta FROM inserted
+BEGIN
+--obtener el precio delporducto
+	SELECT @PRECIO=Precio FROM Almacen.Producto WHERE @IDPRODUCTO=idProducto
+--actualizar subtotal
+	UPDATE Transaccion.DetalleVenta SET @SUBTOTAL = Subtotal =(Cantidad*@PRECIO) WHERE idVenta=@IDVENTA
+--Suma de los subtotales de detalle de venta
+	SELECT @SUMASUBT = SUM(Subtotal) FROM Transaccion.DetalleVenta WHERE idVenta = @IDVENTA
+
+	UPDATE Transaccion.Venta SET TOTAL = @SUMASUBT WHERE idVenta =  @IDVENTA
+END
+
+
+
+CREATE TRIGGER Almacen.calculaSubtotal ON Almacen.DetalleDevolucion FOR INSERT
+AS
+	DECLARE @IDPRODUCTO BIGINT
+	DECLARE @IDDEVOLUCION BIGINT
+	DECLARE @CANTIDAD  INT
+	DECLARE @SUBTOTAL FLOAT
+	DECLARE @PRECIO FLOAT
+	DECLARE @SUMASUBT FLOAT
+
+	SELECT @IDPRODUCTO=idProducto,@IDDEVOLUCION=idDevolucion FROM inserted
+BEGIN
+--obtener el precio delporducto
+	SELECT @PRECIO=Precio FROM Almacen.Producto WHERE @IDPRODUCTO=idProducto
+--actualizar subtotal
+	UPDATE Almacen.DetalleDevolucion SET @SUBTOTAL = Subtotal =(Cantidad*@PRECIO) WHERE idDevolucion=@IDDEVOLUCION
+--Suma de los subtotales de detalle de venta
+	SELECT @SUMASUBT = SUM(Subtotal) FROM Almacen.DetalleDevolucion WHERE idDevolucion = @IDDEVOLUCION
+
+	UPDATE Almacen.Devolucion SET TOTAL = @SUMASUBT WHERE idDevolucion =  @IDDEVOLUCION
+END
+
+--- REGLAS
+CREATE RULE R_Tipo AS @Nombre IN ('Individual','Matrimonial','Quenn Size') 
+EXEC sp_bindrule 'R_Tipo','Almacen.Producto.Tamaño' -- SE APLICA UNA REGLA A UN ATRIBUTO EN ESPECIFICO
+
+
+
+INSERT INTO Almacen.Vendedor(Nombre,Domicilio,Email,Telefono,FechaNac,Edad)VALUES ('Diego','B. Anaya','diego_pilcar@hotmail.com',
+'866-132-62-79','1996-10-03',NULL)
+INSERT INTO Almacen.Vendedor(Nombre,Domicilio,Email,Telefono,FechaNac,Edad)VALUES ('Aldo','B. Anaya','aldopilcar@hotmail.com',
+'866-123-45-78','1999-08-23',NULL)
+INSERT INTO Transaccion.Cliente(Nombre,Domicilio,Email,Telefono,FechaNac,Edad)VALUES ('Jose','Roma','hotmail@hotmail.com',
+'123-456-78-90','1996-08-03',NULL)
+INSERT INTO Transaccion.Cliente(Nombre,Domicilio,Email,Telefono,FechaNac,Edad)VALUES ('Ivonne','en mi casa','hotmail@hotmail.com',
+'123-456-78-90','1997-08-30',NULL)
+SELECT * FROM Almacen.Vendedor
+SELECT * FROM Transaccion.Cliente
+
+
+INSERT INTO Almacen.TipoProducto(Nombre,Descripcion) VALUES ('REGINA','JGIJHVJHVGCGCGCGCGJCJ')
+SELECT * FROM Almacen.TipoProducto
+INSERT INTO Almacen.Producto (idTipoProducto,Stock,Tamaño,Precio) VALUES(1,50,'Individual',18.45)
+INSERT INTO Almacen.Producto (idTipoProducto,Stock,Tamaño,Precio) VALUES(1,50,'Matrimonial',20.50)
+INSERT INTO Almacen.Producto (idTipoProducto,Stock,Tamaño,Precio) VALUES(1,50,'Quenn Size',70.50)
+SELECT * FROM Almacen.Producto
+SELECT * FROM Transaccion.Venta
+SELECT * FROM Transaccion.DetalleVenta
+SELECT * FROM  Transaccion.DetalleVenta WHERE idVenta=1
+SELECT * FROM Transaccion.Cliente
+INSERT INTO Transaccion.Venta(idCliente,idVendedor,Fecha,TOTAL) VALUES(1,2,'2019-09-16',NULL)
+SELECT * FROM Transaccion.Venta
+SELECT * FROM Transaccion.DetalleVenta
+INSERT INTO Transaccion.DetalleVenta (idVenta,idProducto,Cantidad,Subtotal)VALUES (1,2,2,NULL)
 
 SELECT idProducto FROM Almacen.Producto WHERE idProducto=(SELECT idProducto FROM Transaccion.DetalleVenta  
 WHERE idVenta=(SELECT idVenta FROM Almacen.DetalleDevolucion WHERE idDevolucion=1))
@@ -143,18 +197,5 @@ SELECT * FROM Almacen.DetalleDevolucion
 SELECT * FROM Transaccion.Venta
 SELECT * FROM Transaccion.DetalleVenta
 SELECT *FROM Almacen.Producto
-INSERT INTO Almacen.DetalleDevolucion (idDevolucion,idProducto,Cantidad,Subtotal) VALUES (4,2,35,NULL)
+INSERT INTO Almacen.DetalleDevolucion (idDevolucion,idProducto,Cantidad,Subtotal) VALUES (2,1,100,NULL)
 SELECT * FROM Almacen.Producto
-
---		TRIGGER PARA SUBSTOTAL
-CREATE TRIGGER Transaccion.calculaSubtotal ON Transaccion.DetalleVenta AFTER INSERT AS BEGIN SET NOCOUNT ON DECLARE
-@ID AS BIGINT SELECT @ID=idProducto FROM inserted UPDATE Transaccion.DetalleVenta 
-SET Subtotal =Cantidad * (SELECT Precio FROM Almacen.Producto WHERE idProducto=@ID)  WHERE idProducto=(SELECT idProducto FROM 
-Almacen.Producto WHERE idProducto=@ID) END
-
-select * from Transaccion.Venta
-
-CREATE TRIGGER Almacen.calculaSubtotal ON Almacen.DetalleDevolucion AFTER INSERT AS BEGIN SET NOCOUNT ON DECLARE
-@ID AS BIGINT SELECT @ID=idProducto FROM inserted UPDATE Almacen.DetalleDevolucion 
-SET Subtotal =Cantidad * (SELECT Precio FROM Almacen.Producto WHERE idProducto=@ID)  WHERE idDevolucion=(SELECT idProducto FROM 
-Almacen.Producto WHERE idProducto=@ID) END
