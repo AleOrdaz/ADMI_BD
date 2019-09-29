@@ -160,7 +160,7 @@ END;
 CREATE RULE R_Tipo AS @Nombre IN ('Individual','Matrimonial','Quenn Size') 
 EXEC sp_bindrule 'R_Tipo','Almacen.Producto.Tamaño' -- SE APLICA UNA REGLA A UN ATRIBUTO EN ESPECIFICO
 
-CREATE RULE R_PrecioProducto AS @PrecioProducto >= 100 AND @PrecioProducto =< 5000
+CREATE RULE R_PrecioProducto AS @PrecioProducto >= 100 AND @PrecioProducto <= 5000
 EXEC sp_bindrule 'R_PrecioProducto', 'Almacen.Producto.Precio';
 
 INSERT INTO Almacen.Vendedor(Nombre,Domicilio,Email,Telefono,FechaNac,Edad)VALUES ('Diego','B. Anaya','diego_pilcar@hotmail.com',
