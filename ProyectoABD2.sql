@@ -1,4 +1,4 @@
-CREATE DATABASE Proyecto;
+ CREATE DATABASE Proyecto;
 USE Proyecto;
 
 CREATE SCHEMA Transaccion;
@@ -94,8 +94,17 @@ CREATE TABLE Almacen.Devolucion
  CREATE TRIGGER Almacen.calculaEdad ON Almacen.Vendedor AFTER INSERT AS BEGIN SET NOCOUNT ON DECLARE
 @ID AS BIGINT SELECT @ID = IdVendedor FROM inserted UPDATE Almacen.Vendedor
 SET Edad = CAST(DATEDIFF(dd,FechaNac,GETDATE()) / 365.25 as int) WHERE IdVendedor=@ID END
+
+CREATE TRIGGER Almacen.calculaEdadUpdate ON Almacen.Vendedor AFTER UPDATE AS BEGIN SET NOCOUNT ON DECLARE
+@ID AS BIGINT SELECT @ID = IdVendedor FROM inserted UPDATE Almacen.Vendedor
+SET Edad = CAST(DATEDIFF(dd,FechaNac,GETDATE()) / 365.25 as int) WHERE IdVendedor=@ID END
+
 ----		EDAD CLIENTE
 CREATE TRIGGER Transaccion.calculaEdad ON Transaccion.Cliente AFTER INSERT AS BEGIN SET NOCOUNT ON DECLARE
+@ID AS BIGINT SELECT @ID=IdCliente FROM inserted UPDATE Transaccion.Cliente
+SET Edad = CAST(DATEDIFF(dd,FechaNac,GETDATE()) / 365.25 as int) WHERE IdCliente=@ID END
+
+CREATE TRIGGER Transaccion.calculaEdadUpdate ON Transaccion.Cliente AFTER UPDATE AS BEGIN SET NOCOUNT ON DECLARE
 @ID AS BIGINT SELECT @ID=IdCliente FROM inserted UPDATE Transaccion.Cliente
 SET Edad = CAST(DATEDIFF(dd,FechaNac,GETDATE()) / 365.25 as int) WHERE IdCliente=@ID END
 
@@ -105,8 +114,19 @@ CREATE TRIGGER Transaccion.calculaStock ON Transaccion.DetalleVenta AFTER INSERT
 @ID AS BIGINT SELECT @ID = IdVenta FROM inserted UPDATE Almacen.Producto
 SET Stock = Stock -(SELECT Cantidad FROM Transaccion.DetalleVenta WHERE IdVenta = @ID ) WHERE IdProducto = (SELECT IdProducto FROM 
 Transaccion.DetalleVenta WHERE IdVenta = @ID)  END
+
+CREATE TRIGGER Transaccion.calculaStockUpdate ON Transaccion.DetalleVenta AFTER UPDATE AS BEGIN SET NOCOUNT ON DECLARE
+@ID AS BIGINT SELECT @ID = IdVenta FROM inserted UPDATE Almacen.Producto
+SET Stock = Stock -(SELECT Cantidad FROM Transaccion.DetalleVenta WHERE IdVenta = @ID ) WHERE IdProducto = (SELECT IdProducto FROM 
+Transaccion.DetalleVenta WHERE IdVenta = @ID)  END
+
 --		TRIGGER DE DEVOLUCION DE PRODUCTOS AUMENTO DE STOCK
 CREATE TRIGGER Almacen.RegresaProducto ON Almacen.DetalleDevolucion AFTER INSERT AS BEGIN SET NOCOUNT ON DECLARE
+@ID AS BIGINT SELECT @ID = IdDevolucion FROM inserted UPDATE Almacen.Producto
+SET Stock = Stock + (SELECT Cantidad FROM Almacen.DetalleDevolucion WHERE IdDevolucion = @ID ) WHERE IdProducto = (SELECT IdProducto FROM 
+Almacen.DetalleDevolucion WHERE IdDevolucion = @ID) END
+
+CREATE TRIGGER Almacen.RegresaProductoUpdate ON Almacen.DetalleDevolucion AFTER UPDATE AS BEGIN SET NOCOUNT ON DECLARE
 @ID AS BIGINT SELECT @ID = IdDevolucion FROM inserted UPDATE Almacen.Producto
 SET Stock = Stock + (SELECT Cantidad FROM Almacen.DetalleDevolucion WHERE IdDevolucion = @ID ) WHERE IdProducto = (SELECT IdProducto FROM 
 Almacen.DetalleDevolucion WHERE IdDevolucion = @ID) END
@@ -133,6 +153,26 @@ BEGIN
 	UPDATE Transaccion.Venta SET TOTAL = @SUMASUBT WHERE IdVenta =  @IDVENTA
 END;
 
+CREATE TRIGGER Transaccion.calculaSubtotalUpdate ON Transaccion.DetalleVenta FOR UPDATE
+AS
+	DECLARE @IDPRODUCTO BIGINT
+	DECLARE @IDVENTA BIGINT
+	DECLARE @CANTIDAD  INT
+	DECLARE @SUBTOTAL FLOAT
+	DECLARE @PRECIO FLOAT
+	DECLARE @SUMASUBT FLOAT
+
+	SELECT @IDPRODUCTO = IdProducto, @IDVENTA = IdVenta FROM inserted
+BEGIN
+--obtener el precio delporducto
+	SELECT @PRECIO = Precio FROM Almacen.Producto WHERE @IDPRODUCTO = IdProducto
+--actualizar subtotal
+	UPDATE Transaccion.DetalleVenta SET @SUBTOTAL = Subtotal =(Cantidad*@PRECIO) WHERE IdVenta = @IDVENTA
+--Suma de los subtotales de detalle de venta
+	SELECT @SUMASUBT = SUM(Subtotal) FROM Transaccion.DetalleVenta WHERE IdVenta = @IDVENTA
+
+	UPDATE Transaccion.Venta SET TOTAL = @SUMASUBT WHERE IdVenta =  @IDVENTA
+END;
 
 
 CREATE TRIGGER Almacen.calculaSubtotal ON Almacen.DetalleDevolucion FOR INSERT
@@ -155,6 +195,29 @@ BEGIN
 
 	UPDATE Almacen.Devolucion SET TOTAL = @SUMASUBT WHERE IdDevolucion =  @IDDEVOLUCION
 END;
+
+CREATE TRIGGER Almacen.calculaSubtotalUpdate ON Almacen.DetalleDevolucion FOR UPDATE
+AS
+	DECLARE @IDPRODUCTO BIGINT
+	DECLARE @IDDEVOLUCION BIGINT
+	DECLARE @CANTIDAD  INT
+	DECLARE @SUBTOTAL FLOAT
+	DECLARE @PRECIO FLOAT
+	DECLARE @SUMASUBT FLOAT
+
+	SELECT @IDPRODUCTO = IdProducto, @IDDEVOLUCION = IdDevolucion FROM inserted
+BEGIN
+--obtener el precio delporducto
+	SELECT @PRECIO = Precio FROM Almacen.Producto WHERE @IDPRODUCTO = IdProducto
+--actualizar subtotal
+	UPDATE Almacen.DetalleDevolucion SET @SUBTOTAL = Subtotal =(Cantidad*@PRECIO) WHERE IdDevolucion = @IDDEVOLUCION
+--Suma de los subtotales de detalle de venta
+	SELECT @SUMASUBT = SUM(Subtotal) FROM Almacen.DetalleDevolucion WHERE IdDevolucion = @IDDEVOLUCION
+
+	UPDATE Almacen.Devolucion SET TOTAL = @SUMASUBT WHERE IdDevolucion =  @IDDEVOLUCION
+END;
+
+
 
 --- REGLAS
 CREATE RULE R_Tipo AS @Nombre IN ('Individual','Matrimonial','Quenn Size') 
