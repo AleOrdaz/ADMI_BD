@@ -31,11 +31,6 @@ namespace VianneySQL
             try
             {
                 conexion.Open();
-<<<<<<< HEAD
-                //MessageBox.Show("Conexión OK");
-
-=======
->>>>>>> d3a3ed4e28af6da8521453ce42ad4a7ca8274ef4
             }
             catch (Exception exepction)
             {
