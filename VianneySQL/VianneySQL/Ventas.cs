@@ -13,31 +13,38 @@ namespace VianneySQL
 {
     public partial class Ventas : Form
     {
-        SqlConnection conexion2; //Para poder conectar con la BD de SQL
-
+        SqlConnection conexion; //Para poder conectar con la BD de SQL
+        DetallesVenta detallesVenta;
+        Venta venta;
         public Ventas(SqlConnection conexion)
         {
             InitializeComponent();
-            conexion2 = conexion;
-            MessageBox.Show("Exito");
+            this.conexion = conexion;
+            detallesVenta = new DetallesVenta(conexion);
+            venta = new Venta(conexion);
+            agregaControlVenta();
+            agregaControlDetallesVenta();
         }
 
-        /**Llamado de las ventas**/
-        private void Producto_Click(object sender, EventArgs e)
-        {
-            Productos producto = new Productos(conexion2);
-            producto.Show();
+        public void agregaControlVenta() {
+            panelVentas.Controls.Add(venta);
+            venta.Dock = DockStyle.Fill;
+            venta.BringToFront();
         }
 
-        private void Devolucion_Click(object sender, EventArgs e)
-        {
-            Devoluciones devolucion = new Devoluciones(conexion2);
-            devolucion.Show();
+        public void agregaControlDetallesVenta() {
+            panelVentas.Controls.Add(detallesVenta);
+            detallesVenta.Dock = DockStyle.Fill;
         }
 
-        private void Ventas_Load(object sender, EventArgs e)
-        {
+        public void cambiaADetallesVenta(int idVenta) {
+            detallesVenta.IdVenta = idVenta;
+            detallesVenta.BringToFront();
+            detallesVenta.muestraConsultaDetallesVenta();
+        }
 
+        public void cambiaAVenta() {
+            venta.BringToFront();
         }
     }
 }

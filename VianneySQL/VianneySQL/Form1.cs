@@ -24,19 +24,19 @@ namespace VianneySQL
         //Para conectar Automaticamente la BD
         private void ConectarBD()
         {
-            string connectionString = null;
-            connectionString = "Server=LAPTOP-OFNE692H\\SQLEXPRESS; Database = Proyecto; Trusted_Connection=true;";
-
+            string connectionString = null, usuario;
+            usuario = "LAPTOP-KDNRGED3\\SQLEXPRESS;";
+            connectionString = "Server=" + usuario + "Database = Proyecto; Trusted_Connection=true;";
             conexion = new SqlConnection(connectionString);
             try
             {
                 conexion.Open();
-                MessageBox.Show("Conexión OK");
+                //MessageBox.Show("Conexión OK");
 
             }
-            catch (Exception)
+            catch (Exception exepction)
             {
-                MessageBox.Show("Conexión Fallida");
+                MessageBox.Show("Conexión Fallida: " + exepction.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
