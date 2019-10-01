@@ -26,6 +26,7 @@ namespace VianneySQL
             agregaControlDetallesVenta();
         }
 
+<<<<<<< HEAD
         public void agregaControlVenta() {
             panelVentas.Controls.Add(venta);
             venta.Dock = DockStyle.Fill;
@@ -35,6 +36,19 @@ namespace VianneySQL
         public void agregaControlDetallesVenta() {
             panelVentas.Controls.Add(detallesVenta);
             detallesVenta.Dock = DockStyle.Fill;
+=======
+        /**Llamado de las ventas**/
+        private void Producto_Click(object sender, EventArgs e)
+        {
+            //Productos producto = new Productos(conexion2);
+            //producto.Show();
+        }
+
+        private void Devolucion_Click(object sender, EventArgs e)
+        {
+            //Devoluciones devolucion = new Devoluciones(conexion2);
+            //devolucion.Show();
+>>>>>>> d3a3ed4e28af6da8521453ce42ad4a7ca8274ef4
         }
 
         public void cambiaADetallesVenta(int idVenta) {
