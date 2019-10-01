@@ -50,3 +50,21 @@ C:\Users\Maria\OneDrive\Escritorio\ADMI_BD\VianneySQL\VianneySQL\obj\Debug\Viann
 C:\Users\Maria\OneDrive\Escritorio\ADMI_BD\VianneySQL\VianneySQL\obj\Debug\VianneySQL.exe
 C:\Users\Maria\OneDrive\Escritorio\ADMI_BD\VianneySQL\VianneySQL\obj\Debug\VianneySQL.pdb
 >>>>>>> d3a3ed4e28af6da8521453ce42ad4a7ca8274ef4
+C:\Users\Maria\OneDrive\Escritorio\ADMI_BD-master\VianneySQL\VianneySQL\obj\Debug\VianneySQL.csprojAssemblyReference.cache
+C:\Users\Maria\OneDrive\Escritorio\ADMI_BD-master\VianneySQL\VianneySQL\obj\Debug\VianneySQL.Clientes.resources
+C:\Users\Maria\OneDrive\Escritorio\ADMI_BD-master\VianneySQL\VianneySQL\obj\Debug\VianneySQL.DetallesVenta.resources
+C:\Users\Maria\OneDrive\Escritorio\ADMI_BD-master\VianneySQL\VianneySQL\obj\Debug\VianneySQL.Devoluciones.resources
+C:\Users\Maria\OneDrive\Escritorio\ADMI_BD-master\VianneySQL\VianneySQL\obj\Debug\VianneySQL.Vianney.resources
+C:\Users\Maria\OneDrive\Escritorio\ADMI_BD-master\VianneySQL\VianneySQL\obj\Debug\VianneySQL.Productos.resources
+C:\Users\Maria\OneDrive\Escritorio\ADMI_BD-master\VianneySQL\VianneySQL\obj\Debug\VianneySQL.Productos1.resources
+C:\Users\Maria\OneDrive\Escritorio\ADMI_BD-master\VianneySQL\VianneySQL\obj\Debug\VianneySQL.Properties.Resources.resources
+C:\Users\Maria\OneDrive\Escritorio\ADMI_BD-master\VianneySQL\VianneySQL\obj\Debug\VianneySQL.Vendedores.resources
+C:\Users\Maria\OneDrive\Escritorio\ADMI_BD-master\VianneySQL\VianneySQL\obj\Debug\VianneySQL.Venta.resources
+C:\Users\Maria\OneDrive\Escritorio\ADMI_BD-master\VianneySQL\VianneySQL\obj\Debug\VianneySQL.Ventas.resources
+C:\Users\Maria\OneDrive\Escritorio\ADMI_BD-master\VianneySQL\VianneySQL\obj\Debug\VianneySQL.csproj.GenerateResource.cache
+C:\Users\Maria\OneDrive\Escritorio\ADMI_BD-master\VianneySQL\VianneySQL\obj\Debug\VianneySQL.csproj.CoreCompileInputs.cache
+C:\Users\Maria\OneDrive\Escritorio\ADMI_BD-master\VianneySQL\VianneySQL\obj\Debug\VianneySQL.exe
+C:\Users\Maria\OneDrive\Escritorio\ADMI_BD-master\VianneySQL\VianneySQL\obj\Debug\VianneySQL.pdb
+C:\Users\Maria\OneDrive\Escritorio\ADMI_BD-master\VianneySQL\VianneySQL\bin\Debug\VianneySQL.exe.config
+C:\Users\Maria\OneDrive\Escritorio\ADMI_BD-master\VianneySQL\VianneySQL\bin\Debug\VianneySQL.exe
+C:\Users\Maria\OneDrive\Escritorio\ADMI_BD-master\VianneySQL\VianneySQL\bin\Debug\VianneySQL.pdb

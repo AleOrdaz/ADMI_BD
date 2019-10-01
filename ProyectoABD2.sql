@@ -1,4 +1,4 @@
- CREATE DATABASE Proyecto;
+CREATE DATABASE Proyecto;
 USE Proyecto;
 
 CREATE SCHEMA Transaccion;
@@ -263,3 +263,8 @@ SELECT * FROM Transaccion.DetalleVenta
 SELECT *FROM Almacen.Producto
 INSERT INTO Almacen.DetalleDevolucion (IdDevolucion,IdProducto,Cantidad,Subtotal) VALUES (2,1,101,NULL)
 SELECT * FROM Almacen.Producto
+
+
+SELECT * FROM Almacen.Producto JOIN Almacen.TipoProducto
+                            ON Almacen.Producto.IdTipoProducto = Almacen.TipoProducto.IdTipoProducto
+                            WHERE Almacen.Producto.IdTipoProducto = 1

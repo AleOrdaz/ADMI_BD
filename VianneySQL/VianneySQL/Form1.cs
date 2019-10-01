@@ -25,7 +25,7 @@ namespace VianneySQL
         private void ConectarBD()
         {
             string connectionString = null, usuario;
-            usuario = "LAPTOP-KDNRGED3\\SQLEXPRESS;";
+            usuario = "LAPTOP-OFNE692H\\SQLEXPRESS;";
             connectionString = "Server=" + usuario + "Database = Proyecto; Trusted_Connection=true;";
             conexion = new SqlConnection(connectionString);
             try
@@ -67,6 +67,11 @@ namespace VianneySQL
         {
             Clientes cliente = new Clientes(conexion);
             cliente.Show();
+        }
+
+        private void Vianney_Load(object sender, EventArgs e)
+        {
+
         }
     }
 }

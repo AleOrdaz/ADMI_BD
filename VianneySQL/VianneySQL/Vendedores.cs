@@ -34,7 +34,7 @@ namespace VianneySQL
         }
 
         //Agregar Vendedores
-        private void Agregar_Click(object sender, EventArgs e)
+        private void toolStripButtonAgregar_Click(object sender, EventArgs e)
         {
             string query = "INSERT INTO Almacen.Vendedor(Nombre, Domicilio, Email, Telefono, FechaNac) VALUES (@Nombre, @Domicilio, @Email, @Telefono, @FechaNac)";
             SqlCommand comando = new SqlCommand(query, conexion2);
@@ -57,7 +57,7 @@ namespace VianneySQL
         }
 
         //Modifica los DATOS de los Vendedores
-        private void Modificar_Click(object sender, EventArgs e)
+        private void toolStripButtonModificar_Click(object sender, EventArgs e)
         {
             string query = "UPDATE  Almacen.Vendedor SET Nombre = '" + Nombre.Text +
                                                               "', Domicilio = '" + Domicilio.Text +
@@ -76,7 +76,6 @@ namespace VianneySQL
                 Email.Text = "";
                 Telefono.Text = "";
                 FechaNac.Text = "";
-                Agregar.Enabled = true;
             }
             catch (Exception ex)
             {
@@ -85,7 +84,7 @@ namespace VianneySQL
         }
 
         //elimina los datos del vendedor
-        private void Eliminar_Click(object sender, EventArgs e)
+        private void toolStripButtonEliminar_Click(object sender, EventArgs e)
         {
             string query = "DELETE FROM Almacen.Vendedor WHERE IdVendedor ="
                     + dataGridView1.Rows[dataGridView1.CurrentCell.RowIndex].Cells[0].Value.ToString();
@@ -100,7 +99,6 @@ namespace VianneySQL
                 Email.Text = "";
                 Telefono.Text = "";
                 FechaNac.Text = "";
-                Agregar.Enabled = true;
             }
             catch (Exception ex)
             {
@@ -116,7 +114,7 @@ namespace VianneySQL
             Email.Text = dataGridView1.Rows[dataGridView1.CurrentCell.RowIndex].Cells[3].Value.ToString();
             Telefono.Text = dataGridView1.Rows[dataGridView1.CurrentCell.RowIndex].Cells[4].Value.ToString();
             FechaNac.Text = dataGridView1.Rows[dataGridView1.CurrentCell.RowIndex].Cells[5].Value.ToString();
-            Agregar.Enabled = false;
         }
+
     }
 }

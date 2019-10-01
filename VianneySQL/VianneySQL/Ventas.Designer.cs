@@ -37,20 +37,20 @@
             this.panelVentas.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.panelVentas.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panelVentas.Location = new System.Drawing.Point(0, 0);
+            this.panelVentas.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.panelVentas.Name = "panelVentas";
-            this.panelVentas.Size = new System.Drawing.Size(1007, 653);
+            this.panelVentas.Size = new System.Drawing.Size(755, 531);
             this.panelVentas.TabIndex = 0;
             // 
             // Ventas
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoScroll = true;
             this.BackColor = System.Drawing.Color.Thistle;
-            this.ClientSize = new System.Drawing.Size(1007, 653);
+            this.ClientSize = new System.Drawing.Size(755, 531);
             this.Controls.Add(this.panelVentas);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
-            this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "Ventas";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Ventas";

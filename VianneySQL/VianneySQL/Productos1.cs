@@ -43,7 +43,7 @@ namespace VianneySQL
         }
 
         //Agregar producto 
-        private void Agregar_Click(object sender, EventArgs e)
+        private void toolStripButtonAgregar_Click(object sender, EventArgs e)
         {
             string query = "INSERT INTO Almacen.TipoProducto(Nombre, Descripcion) VALUES (@Nombre, @Descripcion)";
             SqlCommand comando = new SqlCommand(query, conexion2);
@@ -61,7 +61,8 @@ namespace VianneySQL
             }
         }
 
-        private void Modificar_Click(object sender, EventArgs e)
+        //Boton modifica el producto
+        private void toolStripButtonModificar_Click(object sender, EventArgs e)
         {
             string query = "UPDATE  Almacen.TipoProducto SET Nombre = '" + Nombre.Text +
                                                     "', Descripcion = '" + Descripcion.Text + "'" +
@@ -74,7 +75,6 @@ namespace VianneySQL
                 Datos();
                 Nombre.Text = "";
                 Descripcion.Text = "";
-                Agregar.Enabled = true;
             }
             catch (Exception ex)
             {
@@ -82,7 +82,8 @@ namespace VianneySQL
             }
         }
 
-        private void Eliminar_Click(object sender, EventArgs e)
+        //Boton para eliminar un producto
+        private void toolStripButtonEliminar_Click(object sender, EventArgs e)
         {
             string query = "DELETE FROM Almacen.TipoProducto " +
                             "WHERE IdTipoProducto =" + dataGridView1.Rows[dataGridView1.CurrentCell.RowIndex].Cells[0].Value.ToString();
@@ -94,7 +95,6 @@ namespace VianneySQL
                 Datos();
                 Nombre.Text = "";
                 Descripcion.Text = "";
-                Agregar.Enabled = true;
             }
             catch (Exception ex)
             {
@@ -106,7 +106,7 @@ namespace VianneySQL
         {
             Nombre.Text = dataGridView1.Rows[dataGridView1.CurrentCell.RowIndex].Cells[1].Value.ToString();
             Descripcion.Text = dataGridView1.Rows[dataGridView1.CurrentCell.RowIndex].Cells[2].Value.ToString();
-            Agregar.Enabled = false;
         }
+
     }
 }

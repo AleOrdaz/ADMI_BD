@@ -29,11 +29,12 @@
         private void InitializeComponent()
         {
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
+            this.vendedores = new System.Windows.Forms.ToolStripMenuItem();
+            this.clienteToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.Productos = new System.Windows.Forms.ToolStripMenuItem();
             this.Venta = new System.Windows.Forms.ToolStripMenuItem();
             this.Devolucion = new System.Windows.Forms.ToolStripMenuItem();
-            this.clienteToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.vendedores = new System.Windows.Forms.ToolStripMenuItem();
+            this.buttonVerClientes = new System.Windows.Forms.Button();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -47,9 +48,23 @@
             this.Devolucion});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(612, 24);
+            this.menuStrip1.Size = new System.Drawing.Size(385, 24);
             this.menuStrip1.TabIndex = 0;
             this.menuStrip1.Text = "menuStrip1";
+            // 
+            // vendedores
+            // 
+            this.vendedores.Name = "vendedores";
+            this.vendedores.Size = new System.Drawing.Size(69, 20);
+            this.vendedores.Text = "Vendedor";
+            this.vendedores.Click += new System.EventHandler(this.vendedores_Click);
+            // 
+            // clienteToolStripMenuItem
+            // 
+            this.clienteToolStripMenuItem.Name = "clienteToolStripMenuItem";
+            this.clienteToolStripMenuItem.Size = new System.Drawing.Size(56, 20);
+            this.clienteToolStripMenuItem.Text = "Cliente";
+            this.clienteToolStripMenuItem.Click += new System.EventHandler(this.clienteToolStripMenuItem_Click);
             // 
             // Productos
             // 
@@ -72,31 +87,34 @@
             this.Devolucion.Text = "Devolucion";
             this.Devolucion.Click += new System.EventHandler(this.Devolucion_Click);
             // 
-            // clienteToolStripMenuItem
+            // buttonVerClientes
             // 
-            this.clienteToolStripMenuItem.Name = "clienteToolStripMenuItem";
-            this.clienteToolStripMenuItem.Size = new System.Drawing.Size(56, 20);
-            this.clienteToolStripMenuItem.Text = "Cliente";
-            this.clienteToolStripMenuItem.Click += new System.EventHandler(this.clienteToolStripMenuItem_Click);
-            // 
-            // vendedores
-            // 
-            this.vendedores.Name = "vendedores";
-            this.vendedores.Size = new System.Drawing.Size(69, 20);
-            this.vendedores.Text = "Vendedor";
-            this.vendedores.Click += new System.EventHandler(this.vendedores_Click);
+            this.buttonVerClientes.AutoSize = true;
+            this.buttonVerClientes.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(121)))), ((int)(((byte)(33)))), ((int)(((byte)(109)))));
+            this.buttonVerClientes.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
+            this.buttonVerClientes.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(121)))), ((int)(((byte)(33)))), ((int)(((byte)(109)))));
+            this.buttonVerClientes.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.buttonVerClientes.ForeColor = System.Drawing.Color.White;
+            this.buttonVerClientes.Location = new System.Drawing.Point(25, 95);
+            this.buttonVerClientes.Name = "buttonVerClientes";
+            this.buttonVerClientes.Size = new System.Drawing.Size(115, 40);
+            this.buttonVerClientes.TabIndex = 10;
+            this.buttonVerClientes.Text = "Ver Clientes";
+            this.buttonVerClientes.UseVisualStyleBackColor = false;
             // 
             // Vianney
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.Thistle;
-            this.ClientSize = new System.Drawing.Size(612, 371);
+            this.ClientSize = new System.Drawing.Size(385, 326);
+            this.Controls.Add(this.buttonVerClientes);
             this.Controls.Add(this.menuStrip1);
             this.MainMenuStrip = this.menuStrip1;
             this.Name = "Vianney";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Vianney";
+            this.Load += new System.EventHandler(this.Vianney_Load);
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
             this.ResumeLayout(false);
@@ -112,6 +130,7 @@
         private System.Windows.Forms.ToolStripMenuItem Devolucion;
         private System.Windows.Forms.ToolStripMenuItem clienteToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem vendedores;
+        private System.Windows.Forms.Button buttonVerClientes;
     }
 }
 

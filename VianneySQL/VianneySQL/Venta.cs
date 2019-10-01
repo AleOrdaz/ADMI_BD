@@ -62,27 +62,27 @@ namespace VianneySQL
             this.labelIdVendedor.AutoSize = true;
             this.labelIdVendedor.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.labelIdVendedor.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(121)))), ((int)(((byte)(33)))), ((int)(((byte)(109)))));
-            this.labelIdVendedor.Location = new System.Drawing.Point(3, 70);
+            this.labelIdVendedor.Location = new System.Drawing.Point(15, 101);
             this.labelIdVendedor.Name = "labelIdVendedor";
-            this.labelIdVendedor.Size = new System.Drawing.Size(119, 25);
+            this.labelIdVendedor.Size = new System.Drawing.Size(97, 20);
             this.labelIdVendedor.TabIndex = 1;
             this.labelIdVendedor.Text = "Id Vendedor";
             // 
             // textBoxIdVendedor
             // 
-            this.textBoxIdVendedor.Location = new System.Drawing.Point(128, 72);
+            this.textBoxIdVendedor.Location = new System.Drawing.Point(118, 103);
             this.textBoxIdVendedor.Name = "textBoxIdVendedor";
             this.textBoxIdVendedor.ReadOnly = true;
-            this.textBoxIdVendedor.Size = new System.Drawing.Size(100, 22);
+            this.textBoxIdVendedor.Size = new System.Drawing.Size(100, 20);
             this.textBoxIdVendedor.TabIndex = 2;
             this.textBoxIdVendedor.TextChanged += new System.EventHandler(this.textBoxIdVendedor_TextChanged);
             // 
             // textBoxIdCliente
             // 
-            this.textBoxIdCliente.Location = new System.Drawing.Point(334, 73);
+            this.textBoxIdCliente.Location = new System.Drawing.Point(328, 103);
             this.textBoxIdCliente.Name = "textBoxIdCliente";
             this.textBoxIdCliente.ReadOnly = true;
-            this.textBoxIdCliente.Size = new System.Drawing.Size(100, 22);
+            this.textBoxIdCliente.Size = new System.Drawing.Size(100, 20);
             this.textBoxIdCliente.TabIndex = 4;
             this.textBoxIdCliente.TextChanged += new System.EventHandler(this.textBoxIdCliente_TextChanged);
             // 
@@ -91,9 +91,9 @@ namespace VianneySQL
             this.labelIdCliente.AutoSize = true;
             this.labelIdCliente.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.labelIdCliente.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(121)))), ((int)(((byte)(33)))), ((int)(((byte)(109)))));
-            this.labelIdCliente.Location = new System.Drawing.Point(234, 69);
+            this.labelIdCliente.Location = new System.Drawing.Point(246, 100);
             this.labelIdCliente.Name = "labelIdCliente";
-            this.labelIdCliente.Size = new System.Drawing.Size(94, 25);
+            this.labelIdCliente.Size = new System.Drawing.Size(76, 20);
             this.labelIdCliente.TabIndex = 3;
             this.labelIdCliente.Text = "Id Cliente";
             // 
@@ -104,7 +104,7 @@ namespace VianneySQL
             this.label1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(121)))), ((int)(((byte)(33)))), ((int)(((byte)(109)))));
             this.label1.Location = new System.Drawing.Point(3, 139);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(67, 25);
+            this.label1.Size = new System.Drawing.Size(54, 20);
             this.label1.TabIndex = 5;
             this.label1.Text = "Fecha";
             // 
@@ -112,7 +112,7 @@ namespace VianneySQL
             // 
             this.dateTimePickerFechaVenta.Location = new System.Drawing.Point(76, 139);
             this.dateTimePickerFechaVenta.Name = "dateTimePickerFechaVenta";
-            this.dateTimePickerFechaVenta.Size = new System.Drawing.Size(358, 22);
+            this.dateTimePickerFechaVenta.Size = new System.Drawing.Size(358, 20);
             this.dateTimePickerFechaVenta.TabIndex = 6;
             // 
             // toolStripButtonAgregar
@@ -121,7 +121,7 @@ namespace VianneySQL
             this.toolStripButtonAgregar.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.toolStripButtonAgregar.Name = "toolStripButtonAgregar";
             this.toolStripButtonAgregar.Overflow = System.Windows.Forms.ToolStripItemOverflow.Never;
-            this.toolStripButtonAgregar.Size = new System.Drawing.Size(99, 36);
+            this.toolStripButtonAgregar.Size = new System.Drawing.Size(85, 36);
             this.toolStripButtonAgregar.Text = "Agregar";
             this.toolStripButtonAgregar.TextDirection = System.Windows.Forms.ToolStripTextDirection.Horizontal;
             this.toolStripButtonAgregar.Click += new System.EventHandler(this.toolStripButtonAgregar_Click);
@@ -131,7 +131,7 @@ namespace VianneySQL
             this.toolStripButtonModificar.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButtonModificar.Image")));
             this.toolStripButtonModificar.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.toolStripButtonModificar.Name = "toolStripButtonModificar";
-            this.toolStripButtonModificar.Size = new System.Drawing.Size(109, 36);
+            this.toolStripButtonModificar.Size = new System.Drawing.Size(94, 36);
             this.toolStripButtonModificar.Text = "Modificar";
             this.toolStripButtonModificar.Click += new System.EventHandler(this.toolStripButtonModificar_Click);
             // 
@@ -140,7 +140,7 @@ namespace VianneySQL
             this.toolStripButtonEliminar.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButtonEliminar.Image")));
             this.toolStripButtonEliminar.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.toolStripButtonEliminar.Name = "toolStripButtonEliminar";
-            this.toolStripButtonEliminar.Size = new System.Drawing.Size(99, 36);
+            this.toolStripButtonEliminar.Size = new System.Drawing.Size(86, 36);
             this.toolStripButtonEliminar.Text = "Eliminar";
             this.toolStripButtonEliminar.Click += new System.EventHandler(this.toolStripButtonEliminar_Click);
             // 
@@ -165,12 +165,13 @@ namespace VianneySQL
             this.toolStripButtonDetallesVenta.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButtonDetallesVenta.Image")));
             this.toolStripButtonDetallesVenta.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.toolStripButtonDetallesVenta.Name = "toolStripButtonDetallesVenta";
-            this.toolStripButtonDetallesVenta.Size = new System.Drawing.Size(140, 36);
+            this.toolStripButtonDetallesVenta.Size = new System.Drawing.Size(116, 36);
             this.toolStripButtonDetallesVenta.Text = "Detalles Venta";
             this.toolStripButtonDetallesVenta.Click += new System.EventHandler(this.toolStripButtonDetallesVenta_Click);
             // 
             // dataGridViewInformacion
             // 
+            this.dataGridViewInformacion.AllowUserToAddRows = false;
             this.dataGridViewInformacion.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dataGridViewInformacion.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridViewInformacion.Location = new System.Drawing.Point(440, 73);
@@ -190,9 +191,9 @@ namespace VianneySQL
             this.buttonVerVendedores.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(121)))), ((int)(((byte)(33)))), ((int)(((byte)(109)))));
             this.buttonVerVendedores.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.buttonVerVendedores.ForeColor = System.Drawing.Color.White;
-            this.buttonVerVendedores.Location = new System.Drawing.Point(8, 100);
+            this.buttonVerVendedores.Location = new System.Drawing.Point(52, 61);
             this.buttonVerVendedores.Name = "buttonVerVendedores";
-            this.buttonVerVendedores.Size = new System.Drawing.Size(220, 27);
+            this.buttonVerVendedores.Size = new System.Drawing.Size(106, 27);
             this.buttonVerVendedores.TabIndex = 8;
             this.buttonVerVendedores.Text = "Ver Vendedores";
             this.buttonVerVendedores.UseVisualStyleBackColor = false;
@@ -206,9 +207,9 @@ namespace VianneySQL
             this.buttonVerClientes.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(121)))), ((int)(((byte)(33)))), ((int)(((byte)(109)))));
             this.buttonVerClientes.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.buttonVerClientes.ForeColor = System.Drawing.Color.White;
-            this.buttonVerClientes.Location = new System.Drawing.Point(239, 101);
+            this.buttonVerClientes.Location = new System.Drawing.Point(232, 61);
             this.buttonVerClientes.Name = "buttonVerClientes";
-            this.buttonVerClientes.Size = new System.Drawing.Size(195, 27);
+            this.buttonVerClientes.Size = new System.Drawing.Size(106, 27);
             this.buttonVerClientes.TabIndex = 9;
             this.buttonVerClientes.Text = "Ver Clientes";
             this.buttonVerClientes.UseVisualStyleBackColor = false;
@@ -227,16 +228,17 @@ namespace VianneySQL
             // 
             // dataGridViewVentas
             // 
+            this.dataGridViewVentas.AllowUserToAddRows = false;
             this.dataGridViewVentas.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dataGridViewVentas.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridViewVentas.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dataGridViewVentas.Location = new System.Drawing.Point(3, 18);
+            this.dataGridViewVentas.Location = new System.Drawing.Point(3, 16);
             this.dataGridViewVentas.Name = "dataGridViewVentas";
             this.dataGridViewVentas.ReadOnly = true;
             this.dataGridViewVentas.RowHeadersVisible = false;
             this.dataGridViewVentas.RowHeadersWidth = 51;
             this.dataGridViewVentas.RowTemplate.Height = 24;
-            this.dataGridViewVentas.Size = new System.Drawing.Size(734, 247);
+            this.dataGridViewVentas.Size = new System.Drawing.Size(734, 249);
             this.dataGridViewVentas.TabIndex = 0;
             this.dataGridViewVentas.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridViewVentas_CellClick);
             // 

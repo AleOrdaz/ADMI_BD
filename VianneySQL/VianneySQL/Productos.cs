@@ -16,20 +16,33 @@ namespace VianneySQL
     {
         SqlConnection conexion2; //Para poder conectar con la BD de SQL
         string tipoProducto = "";
+        string id = "";
 
         public Productos(SqlConnection conexion, string tProducto)
         {
             InitializeComponent();
             conexion2 = conexion;
             tipoProducto = tProducto;
-            //comboBox1 = 
-            Datos();
+            string query = "SELECT tp.IdTipoProducto, tp.Nombre FROM Almacen.TipoProducto tp;";
+            insertaDatosDataGridView(query);
         }
+
+        private void insertaDatosDataGridView(string query)
+        {
+            SqlCommand comando = new SqlCommand(query, conexion2);
+            SqlDataAdapter adaptador = new SqlDataAdapter(comando);
+            DataTable tabla = new DataTable();
+            adaptador.Fill(tabla);
+            dataGridViewInformacion.DataSource = tabla;
+        } 
 
         //Muestra los Datos en el dataGrid 
         private void Datos()
         {
-            string query2 = "SELECT * FROM Almacen.Producto";
+            string query2 = "SELECT p.IdProducto, p.IdTipoProducto, p.Stock, p.Tamaño, p.Precio " +
+                            "FROM Almacen.Producto p JOIN Almacen.TipoProducto tp " +
+                            "ON p.IdTipoProducto = tp.IdTipoProducto" +
+                            " WHERE p.IdTipoProducto = " + id;
             SqlCommand comando2 = new SqlCommand(query2, conexion2);
             SqlDataAdapter adapatador = new SqlDataAdapter(comando2);
             DataTable tabla = new DataTable();
@@ -41,26 +54,28 @@ namespace VianneySQL
         { }
 
         /**Llamado de las ventas**/
-        private void Venta_Click(object sender, EventArgs e)
+        private void toolStripButton1_Click(object sender, EventArgs e)
         {
             Ventas venta = new Ventas(conexion2);
             venta.Show();
         }
 
-        private void Devolucion_Click(object sender, EventArgs e)
+        //Llamado a las devoluciones
+        private void toolStripButton2_Click(object sender, EventArgs e)
         {
             Devoluciones devolucion = new Devoluciones(conexion2);
             devolucion.Show();
         }
 
-        private void Agregar_Click(object sender, EventArgs e)
+        //Boton agregar detalles
+        private void toolStripButtonAgregar_Click(object sender, EventArgs e)
         {
-            string query = "INSERT INTO Almacen.Producto(Stock, Tamaño, Precio) VALUES (@Stock, @Tamaño, @Precio)";
+            string query = "INSERT INTO Almacen.Producto(IdTipoProducto, Stock, Tamaño, Precio) VALUES (@IdTipoProducto, @Stock, @Tamaño, @Precio)";
             SqlCommand comando = new SqlCommand(query, conexion2);
+            comando.Parameters.AddWithValue("@IdTipoProducto", id);
             comando.Parameters.AddWithValue("@Stock", Stock.Text);
             comando.Parameters.AddWithValue("@Tamaño", Tamaño.Text);
             comando.Parameters.AddWithValue("@Precio", Precio.Text);
-
             try
             {
                 comando.ExecuteNonQuery();
@@ -72,7 +87,8 @@ namespace VianneySQL
             }
         }
 
-        private void Modificar_Click(object sender, EventArgs e)
+        //Boton para modificar algun detalle en el producto
+        private void toolStripButtonModificar_Click(object sender, EventArgs e)
         {
             string query = "UPDATE  Almacen.Vendedor SET Nombre = '" + Stock.Text +
                                                               "', Domicilio = '" + Tamaño.Text +
@@ -87,7 +103,6 @@ namespace VianneySQL
                 Stock.Text = "";
                 Tamaño.Text = "";
                 Precio.Text = "";
-                Agregar.Enabled = true;
             }
             catch (Exception ex)
             {
@@ -95,7 +110,8 @@ namespace VianneySQL
             }
         }
 
-        private void Eliminar_Click(object sender, EventArgs e)
+        //Boton para eliminar los detalles d eun producto
+        private void toolStripButtonEliminar_Click(object sender, EventArgs e)
         {
             string query = "DELETE FROM Almacen.Producto " +
                             "WHERE IdProducto =" + dataGridView1.Rows[dataGridView1.CurrentCell.RowIndex].Cells[0].Value.ToString();
@@ -108,7 +124,6 @@ namespace VianneySQL
                 Stock.Text = "";
                 Tamaño.Text = "";
                 Precio.Text = "";
-                Agregar.Enabled = true;
             }
             catch (Exception ex)
             {
@@ -121,7 +136,11 @@ namespace VianneySQL
             Stock.Text = dataGridView1.Rows[dataGridView1.CurrentCell.RowIndex].Cells[3].Value.ToString();
             Tamaño.Text = dataGridView1.Rows[dataGridView1.CurrentCell.RowIndex].Cells[2].Value.ToString();
             Precio.Text = dataGridView1.Rows[dataGridView1.CurrentCell.RowIndex].Cells[1].Value.ToString();
-            Agregar.Enabled = false;
+        }
+
+        private void dataGridViewInformacion_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            id = dataGridViewInformacion.Rows[dataGridViewInformacion.CurrentCell.RowIndex].Cells[0].Value.ToString();
         }
     }
 }

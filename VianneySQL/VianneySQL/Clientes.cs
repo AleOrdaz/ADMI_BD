@@ -34,7 +34,7 @@ namespace VianneySQL
         }
 
         //Agrega a un nuevo Cliente
-        private void Agregar_Click(object sender, EventArgs e)
+        private void toolStripButtonAgregar_Click_1(object sender, EventArgs e)
         {
             string query = "INSERT INTO Transaccion.Cliente(Nombre, Domicilio, Email, Telefono, FechaNac) VALUES (@Nombre, @Domicilio, @Email, @Telefono, @FechaNac)";
             SqlCommand comando = new SqlCommand(query, conexion2);
@@ -57,7 +57,7 @@ namespace VianneySQL
         }
 
         //Modifica los datos de un Cliente
-        private void Modificar_Click(object sender, EventArgs e)
+        private void toolStripButtonModificar_Click(object sender, EventArgs e)
         {
             string query = "UPDATE Transaccion.Cliente SET Nombre = '" + Nombre.Text +
                                                   "', Domicilio = '" + Domicilio.Text +
@@ -76,7 +76,6 @@ namespace VianneySQL
                 Email.Text = "";
                 Telefono.Text = "";
                 FechaNac.Text = "";
-                Agregar.Enabled = true;
             }
             catch (Exception ex)
             {
@@ -86,7 +85,7 @@ namespace VianneySQL
         }
 
         //Elimina los datos de un cliente
-        private void Eliminar_Click(object sender, EventArgs e)
+        private void toolStripButtonEliminar_Click(object sender, EventArgs e)
         {
             string query = "DELETE FROM Transaccion.Cliente" +
                            " WHERE IdCliente =" + dataGridView1.Rows[dataGridView1.CurrentCell.RowIndex].Cells[0].Value.ToString();
@@ -101,7 +100,6 @@ namespace VianneySQL
                 Email.Text = "";
                 Telefono.Text = "";
                 FechaNac.Text = "";
-                Agregar.Enabled = true;
             }
             catch (Exception ex)
             {
@@ -109,7 +107,6 @@ namespace VianneySQL
             }
 
         }
-
         //al seleccionar el nombre me da los datos el los texbox
         private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
@@ -118,7 +115,8 @@ namespace VianneySQL
             Email.Text = dataGridView1.Rows[dataGridView1.CurrentCell.RowIndex].Cells[3].Value.ToString();
             Telefono.Text = dataGridView1.Rows[dataGridView1.CurrentCell.RowIndex].Cells[4].Value.ToString();
             FechaNac.Text = dataGridView1.Rows[dataGridView1.CurrentCell.RowIndex].Cells[5].Value.ToString();
-            Agregar.Enabled = false;
         }
+
+
     }
 }
