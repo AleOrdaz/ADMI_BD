@@ -98,7 +98,19 @@ namespace VianneySQL
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message);
+                string query2 = "SELECT COUNT(*) FROM Almacen.Producto " +
+                    "WHERE IdTipoProducto = " + dataGridView1.Rows[dataGridView1.CurrentCell.RowIndex].Cells[0].Value.ToString();
+                SqlCommand comando2 = new SqlCommand(query2, conexion2);
+                SqlDataAdapter adapatador = new SqlDataAdapter(comando2);
+                DataTable tabla = new DataTable();
+                adapatador.Fill(tabla);
+                dataGridView2.DataSource = tabla;
+                string cantidad = dataGridView1.Rows[dataGridView1.CurrentCell.RowIndex].Cells[0].Value.ToString();
+                
+                if (cantidad != "0")
+                {
+                    MessageBox.Show("noooooooooooooo");
+                }
             }
         }
 
@@ -108,5 +120,9 @@ namespace VianneySQL
             Descripcion.Text = dataGridView1.Rows[dataGridView1.CurrentCell.RowIndex].Cells[2].Value.ToString();
         }
 
+        private void Productos1_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 }

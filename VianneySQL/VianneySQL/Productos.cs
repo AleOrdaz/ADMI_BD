@@ -90,10 +90,11 @@ namespace VianneySQL
         //Boton para modificar algun detalle en el producto
         private void toolStripButtonModificar_Click(object sender, EventArgs e)
         {
-            string query = "UPDATE  Almacen.Vendedor SET Nombre = '" + Stock.Text +
-                                                              "', Domicilio = '" + Tamaño.Text +
-                                                              "', Email = '" + Precio.Text +
-                        "WHERE IdProducto = " + dataGridView1.Rows[dataGridView1.CurrentCell.RowIndex].Cells[0].Value.ToString();
+            string query = "UPDATE  Almacen.Producto SET IdTipoProducto = '" + dataGridView1.Rows[dataGridView1.CurrentCell.RowIndex].Cells[1].Value.ToString() +
+                                                     "', Stock = '" + Stock.Text +
+                                                     "', Tamaño = '" + Tamaño.Text +
+                                                     "', Precio = '" + Precio.Text +
+                        "' WHERE IdProducto = " + dataGridView1.Rows[dataGridView1.CurrentCell.RowIndex].Cells[0].Value.ToString();
             SqlCommand comando = new SqlCommand(query, conexion2);
 
             try
@@ -133,14 +134,15 @@ namespace VianneySQL
 
         private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
-            Stock.Text = dataGridView1.Rows[dataGridView1.CurrentCell.RowIndex].Cells[3].Value.ToString();
-            Tamaño.Text = dataGridView1.Rows[dataGridView1.CurrentCell.RowIndex].Cells[2].Value.ToString();
-            Precio.Text = dataGridView1.Rows[dataGridView1.CurrentCell.RowIndex].Cells[1].Value.ToString();
+            Stock.Text = dataGridView1.Rows[dataGridView1.CurrentCell.RowIndex].Cells[2].Value.ToString();
+            Tamaño.Text = dataGridView1.Rows[dataGridView1.CurrentCell.RowIndex].Cells[3].Value.ToString();
+            Precio.Text = dataGridView1.Rows[dataGridView1.CurrentCell.RowIndex].Cells[4].Value.ToString();
         }
 
         private void dataGridViewInformacion_CellClick(object sender, DataGridViewCellEventArgs e)
         {
             id = dataGridViewInformacion.Rows[dataGridViewInformacion.CurrentCell.RowIndex].Cells[0].Value.ToString();
+            Datos();
         }
     }
 }
