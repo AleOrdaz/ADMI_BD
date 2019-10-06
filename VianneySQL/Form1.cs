@@ -38,32 +38,31 @@ namespace VianneySQL
             }
         }
 
-        /**Llamado de las ventas**/
-        private void Productos_Click(object sender, EventArgs e)
+        private void Productos_Click_1(object sender, EventArgs e)
         {
             Productos1 producto = new Productos1(conexion);
             producto.Show();
         }
 
-        private void Venta_Click(object sender, EventArgs e)
+        private void Venta_Click_1(object sender, EventArgs e)
         {
             Ventas venta = new Ventas(conexion);
             venta.Show();
         }
 
-        private void Devolucion_Click(object sender, EventArgs e)
+        private void Devolución_Click(object sender, EventArgs e)
         {
             Devoluciones devolucion = new Devoluciones(conexion);
             devolucion.Show();
         }
 
-        private void vendedores_Click(object sender, EventArgs e)
+        private void Vendedor_Click(object sender, EventArgs e)
         {
             Vendedores vendedor = new Vendedores(conexion);
             vendedor.Show();
         }
 
-        private void clienteToolStripMenuItem_Click(object sender, EventArgs e)
+        private void Clientes_Click(object sender, EventArgs e)
         {
             Clientes cliente = new Clientes(conexion);
             cliente.Show();
@@ -73,5 +72,6 @@ namespace VianneySQL
         {
 
         }
+
     }
 }

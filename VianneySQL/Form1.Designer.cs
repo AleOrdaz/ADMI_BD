@@ -52,6 +52,7 @@
             this.Vendedor.TabIndex = 10;
             this.Vendedor.Text = "Vendedor";
             this.Vendedor.UseVisualStyleBackColor = false;
+            this.Vendedor.Click += new System.EventHandler(this.Vendedor_Click);
             // 
             // Clientes
             // 
@@ -67,6 +68,7 @@
             this.Clientes.TabIndex = 11;
             this.Clientes.Text = "Clientes";
             this.Clientes.UseVisualStyleBackColor = false;
+            this.Clientes.Click += new System.EventHandler(this.Clientes_Click);
             // 
             // Productos
             // 
@@ -82,6 +84,7 @@
             this.Productos.TabIndex = 12;
             this.Productos.Text = "Productos";
             this.Productos.UseVisualStyleBackColor = false;
+            this.Productos.Click += new System.EventHandler(this.Productos_Click_1);
             // 
             // Venta
             // 
@@ -97,6 +100,7 @@
             this.Venta.TabIndex = 13;
             this.Venta.Text = "Venta";
             this.Venta.UseVisualStyleBackColor = false;
+            this.Venta.Click += new System.EventHandler(this.Venta_Click_1);
             // 
             // Devolución
             // 
@@ -112,6 +116,7 @@
             this.Devolución.TabIndex = 14;
             this.Devolución.Text = "Devolución";
             this.Devolución.UseVisualStyleBackColor = false;
+            this.Devolución.Click += new System.EventHandler(this.Devolución_Click);
             // 
             // pictureBox1
             // 
