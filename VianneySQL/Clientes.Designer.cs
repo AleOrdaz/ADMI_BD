@@ -33,7 +33,6 @@
             this.Telefono = new System.Windows.Forms.TextBox();
             this.Domicilio = new System.Windows.Forms.TextBox();
             this.Email = new System.Windows.Forms.TextBox();
-            this.FechaNac = new System.Windows.Forms.TextBox();
             this.Nombre = new System.Windows.Forms.TextBox();
             this.label5 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
@@ -44,6 +43,7 @@
             this.toolStripButtonAgregar = new System.Windows.Forms.ToolStripButton();
             this.toolStripButtonModificar = new System.Windows.Forms.ToolStripButton();
             this.toolStripButtonEliminar = new System.Windows.Forms.ToolStripButton();
+            this.dateTimePickerFecha = new System.Windows.Forms.DateTimePicker();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.toolStripVenta.SuspendLayout();
             this.SuspendLayout();
@@ -57,7 +57,7 @@
             this.dataGridView1.ReadOnly = true;
             this.dataGridView1.Size = new System.Drawing.Size(708, 199);
             this.dataGridView1.TabIndex = 49;
-            this.dataGridView1.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellContentClick);
+            this.dataGridView1.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellContentClick);
             // 
             // Telefono
             // 
@@ -82,14 +82,6 @@
             this.Email.Name = "Email";
             this.Email.Size = new System.Drawing.Size(360, 21);
             this.Email.TabIndex = 40;
-            // 
-            // FechaNac
-            // 
-            this.FechaNac.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.FechaNac.Location = new System.Drawing.Point(251, 149);
-            this.FechaNac.Name = "FechaNac";
-            this.FechaNac.Size = new System.Drawing.Size(360, 21);
-            this.FechaNac.TabIndex = 39;
             // 
             // Nombre
             // 
@@ -198,12 +190,20 @@
             this.toolStripButtonEliminar.Text = "Eliminar";
             this.toolStripButtonEliminar.Click += new System.EventHandler(this.toolStripButtonEliminar_Click);
             // 
+            // dateTimePickerFecha
+            // 
+            this.dateTimePickerFecha.Location = new System.Drawing.Point(251, 150);
+            this.dateTimePickerFecha.Name = "dateTimePickerFecha";
+            this.dateTimePickerFecha.Size = new System.Drawing.Size(360, 20);
+            this.dateTimePickerFecha.TabIndex = 57;
+            // 
             // Clientes
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.Thistle;
             this.ClientSize = new System.Drawing.Size(768, 422);
+            this.Controls.Add(this.dateTimePickerFecha);
             this.Controls.Add(this.toolStripVenta);
             this.Controls.Add(this.label9);
             this.Controls.Add(this.label8);
@@ -214,7 +214,6 @@
             this.Controls.Add(this.Telefono);
             this.Controls.Add(this.Domicilio);
             this.Controls.Add(this.Email);
-            this.Controls.Add(this.FechaNac);
             this.Controls.Add(this.Nombre);
             this.Name = "Clientes";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
@@ -233,7 +232,6 @@
         private System.Windows.Forms.TextBox Telefono;
         private System.Windows.Forms.TextBox Domicilio;
         private System.Windows.Forms.TextBox Email;
-        private System.Windows.Forms.TextBox FechaNac;
         private System.Windows.Forms.TextBox Nombre;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Label label1;
@@ -244,5 +242,6 @@
         private System.Windows.Forms.ToolStripButton toolStripButtonAgregar;
         private System.Windows.Forms.ToolStripButton toolStripButtonModificar;
         private System.Windows.Forms.ToolStripButton toolStripButtonEliminar;
+        private System.Windows.Forms.DateTimePicker dateTimePickerFecha;
     }
 }

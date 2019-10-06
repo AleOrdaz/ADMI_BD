@@ -15,12 +15,14 @@ namespace VianneySQL
     {
         SqlConnection conexion2; //Para poder conectar con la BD de SQL
         string tipoproducto = "";
+        bool seleccion = false;
 
         public Productos1(SqlConnection conexion)
         {
             InitializeComponent();
             conexion2 = conexion;
             Datos();
+            toolStripButtonEliminar.Enabled = toolStripButtonModificar.Enabled = false;
         }
 
         //Muestra los Datos en el dataGrid 
@@ -45,20 +47,25 @@ namespace VianneySQL
         //Agregar producto 
         private void toolStripButtonAgregar_Click(object sender, EventArgs e)
         {
-            string query = "INSERT INTO Almacen.TipoProducto(Nombre, Descripcion) VALUES (@Nombre, @Descripcion)";
-            SqlCommand comando = new SqlCommand(query, conexion2);
-            comando.Parameters.AddWithValue("@Nombre", Nombre.Text);
-            comando.Parameters.AddWithValue("@Descripcion", Descripcion.Text);
+            if (Nombre.Text != "" && Descripcion.Text != "")
+            { 
+                string query = "INSERT INTO Almacen.TipoProducto(Nombre, Descripcion) VALUES (@Nombre, @Descripcion)";
+                SqlCommand comando = new SqlCommand(query, conexion2);
+                comando.Parameters.AddWithValue("@Nombre", Nombre.Text);
+                comando.Parameters.AddWithValue("@Descripcion", Descripcion.Text);
 
-            try
-            {
-                comando.ExecuteNonQuery();
-                Datos();
+                try
+                {
+                    comando.ExecuteNonQuery();
+                    Datos();
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message);
+                }
             }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-            }
+            else
+            {  MessageBox.Show("Favor de completar todos los campos", "Error", MessageBoxButtons.OK);  }
         }
 
         //Boton modifica el producto
@@ -109,20 +116,20 @@ namespace VianneySQL
                 
                 if (cantidad != "0")
                 {
-                    MessageBox.Show("Por Favor, primero elimine los Elementos agregados de este.");
+                    MessageBox.Show("Por Favor, primero elimine los Elementos agregados de este.", "Error", MessageBoxButtons.OK);
                 }
             }
         }
 
         private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
+            seleccion = true;
             Nombre.Text = dataGridView1.Rows[dataGridView1.CurrentCell.RowIndex].Cells[1].Value.ToString();
             Descripcion.Text = dataGridView1.Rows[dataGridView1.CurrentCell.RowIndex].Cells[2].Value.ToString();
+            toolStripButtonModificar.Enabled = toolStripButtonEliminar.Enabled = true;
         }
 
         private void Productos1_Load(object sender, EventArgs e)
-        {
-
-        }
+        { }
     }
 }

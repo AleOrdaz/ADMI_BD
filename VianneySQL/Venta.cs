@@ -219,7 +219,7 @@ namespace VianneySQL
             // 
             this.groupBoxVentas.Controls.Add(this.dataGridViewVentas);
             this.groupBoxVentas.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(121)))), ((int)(((byte)(33)))), ((int)(((byte)(109)))));
-            this.groupBoxVentas.Location = new System.Drawing.Point(3, 229);
+            this.groupBoxVentas.Location = new System.Drawing.Point(3, 232);
             this.groupBoxVentas.Name = "groupBoxVentas";
             this.groupBoxVentas.Size = new System.Drawing.Size(740, 268);
             this.groupBoxVentas.TabIndex = 10;

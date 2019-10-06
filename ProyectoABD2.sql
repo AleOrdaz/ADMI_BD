@@ -48,6 +48,7 @@ CREATE TABLE Almacen.Producto
 	CONSTRAINT PK_PRODUCTO1 PRIMARY KEY(idProducto),
 	CONSTRAINT FK_TIPOPRODUCTO FOREIGN KEY(idTipoProducto) REFERENCES Almacen.TipoProducto(idTipoProducto)
 )
+
 CREATE TABLE Transaccion.Venta 
 (
 	idVenta BIGINT IDENTITY(1,1) NOT NULL,
@@ -90,6 +91,7 @@ CREATE TABLE Almacen.Devolucion
 	CONSTRAINT FK_DEVOLUCCION FOREIGN KEY(idDevolucion) REFERENCES Almacen.Devolucion(idDevolucion),
 	CONSTRAINT FK_VENTA4 FOREIGN KEY(idProducto) REFERENCES Almacen.Producto
  )
+
  ---TRIGGERS
  --				EDAD VENDEDOR
  CREATE TRIGGER Almacen.calculaEdad ON Almacen.Vendedor AFTER INSERT AS BEGIN SET NOCOUNT ON DECLARE
@@ -238,11 +240,12 @@ Almacen.Producto WHERE idProducto=@ID) END
 
 
 --- REGLAS
-CREATE RULE R_Tipo AS @Nombre IN ('Individual','Matrimonial','Quenn Size') 
+CREATE RULE R_Tipo AS @Nombre IN ('Individual','Matrimonial','Queen Size') 
 EXEC sp_bindrule 'R_Tipo','Almacen.Producto.Tamaño' -- SE APLICA UNA REGLA A UN ATRIBUTO EN ESPECIFICO
 
 CREATE RULE R_PrecioProducto AS @PrecioProducto >= 100 AND @PrecioProducto <= 5000
 EXEC sp_bindrule 'R_PrecioProducto', 'Almacen.Producto.Precio';
+-----
 
 INSERT INTO Almacen.Vendedor(Nombre,Domicilio,Email,Telefono,FechaNac,Edad)VALUES ('Diego','B. Anaya','diego_pilcar@hotmail.com',
 '866-132-62-79','1996-10-03',NULL)

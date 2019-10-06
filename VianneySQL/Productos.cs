@@ -21,6 +21,7 @@ namespace VianneySQL
         public Productos(SqlConnection conexion, string tProducto)
         {
             InitializeComponent();
+            toolStripButtonEliminar.Enabled = toolStripButtonModificar.Enabled = false;
             conexion2 = conexion;
             tipoProducto = tProducto;
             string query = "SELECT tp.IdTipoProducto, tp.Nombre FROM Almacen.TipoProducto tp;";
@@ -56,21 +57,31 @@ namespace VianneySQL
         //Boton agregar detalles
         private void toolStripButtonAgregar_Click(object sender, EventArgs e)
         {
-            string query = "INSERT INTO Almacen.Producto(IdTipoProducto, Stock, Tamaño, Precio) VALUES (@IdTipoProducto, @Stock, @Tamaño, @Precio)";
-            SqlCommand comando = new SqlCommand(query, conexion2);
-            comando.Parameters.AddWithValue("@IdTipoProducto", id);
-            comando.Parameters.AddWithValue("@Stock", Stock.Text);
-            comando.Parameters.AddWithValue("@Tamaño", Tamaño.Text);
-            comando.Parameters.AddWithValue("@Precio", Precio.Text);
-            try
+            if (id != "")
             {
-                comando.ExecuteNonQuery();
-                Datos();
+                if (Stock.Text != "" && Tamaño.Text != "" && Precio.Text != "")
+                {
+                    string query = "INSERT INTO Almacen.Producto(IdTipoProducto, Stock, Tamaño, Precio) VALUES (@IdTipoProducto, @Stock, @Tamaño, @Precio)";
+                    SqlCommand comando = new SqlCommand(query, conexion2);
+                    comando.Parameters.AddWithValue("@IdTipoProducto", id);
+                    comando.Parameters.AddWithValue("@Stock", Stock.Text);
+                    comando.Parameters.AddWithValue("@Tamaño", Tamaño.Text);
+                    comando.Parameters.AddWithValue("@Precio", Precio.Text);
+                    try
+                    {
+                        comando.ExecuteNonQuery();
+                        Datos();
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show(ex.Message);
+                    }
+                }
+                else
+                { MessageBox.Show("Favor de completar todos los campos", "Error", MessageBoxButtons.OK); }
             }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-            }
+            else
+            { MessageBox.Show("Favor de selccionar un Producto", "Error", MessageBoxButtons.OK); }
         }
 
         //Boton para modificar algun detalle en el producto
@@ -123,6 +134,7 @@ namespace VianneySQL
             Stock.Text = dataGridView1.Rows[dataGridView1.CurrentCell.RowIndex].Cells[2].Value.ToString();
             Tamaño.Text = dataGridView1.Rows[dataGridView1.CurrentCell.RowIndex].Cells[3].Value.ToString();
             Precio.Text = dataGridView1.Rows[dataGridView1.CurrentCell.RowIndex].Cells[4].Value.ToString();
+            toolStripButtonModificar.Enabled = toolStripButtonEliminar.Enabled = true;
         }
 
         private void dataGridViewInformacion_CellClick(object sender, DataGridViewCellEventArgs e)

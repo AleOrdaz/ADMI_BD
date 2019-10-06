@@ -31,7 +31,6 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Vendedores));
             this.Domicilio = new System.Windows.Forms.TextBox();
             this.Email = new System.Windows.Forms.TextBox();
-            this.FechaNac = new System.Windows.Forms.TextBox();
             this.Nombre = new System.Windows.Forms.TextBox();
             this.Telefono = new System.Windows.Forms.TextBox();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
@@ -44,6 +43,7 @@
             this.label7 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
             this.label10 = new System.Windows.Forms.Label();
+            this.dateTimePickerFecha = new System.Windows.Forms.DateTimePicker();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.toolStripVenta.SuspendLayout();
             this.SuspendLayout();
@@ -63,14 +63,6 @@
             this.Email.Name = "Email";
             this.Email.Size = new System.Drawing.Size(360, 21);
             this.Email.TabIndex = 23;
-            // 
-            // FechaNac
-            // 
-            this.FechaNac.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.FechaNac.Location = new System.Drawing.Point(260, 148);
-            this.FechaNac.Name = "FechaNac";
-            this.FechaNac.Size = new System.Drawing.Size(360, 21);
-            this.FechaNac.TabIndex = 22;
             // 
             // Nombre
             // 
@@ -198,12 +190,20 @@
             this.label10.TabIndex = 56;
             this.label10.Text = "Nombre";
             // 
+            // dateTimePickerFecha
+            // 
+            this.dateTimePickerFecha.Location = new System.Drawing.Point(260, 149);
+            this.dateTimePickerFecha.Name = "dateTimePickerFecha";
+            this.dateTimePickerFecha.Size = new System.Drawing.Size(360, 20);
+            this.dateTimePickerFecha.TabIndex = 61;
+            // 
             // Vendedores
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.Thistle;
             this.ClientSize = new System.Drawing.Size(768, 422);
+            this.Controls.Add(this.dateTimePickerFecha);
             this.Controls.Add(this.label9);
             this.Controls.Add(this.label8);
             this.Controls.Add(this.label7);
@@ -214,11 +214,11 @@
             this.Controls.Add(this.Telefono);
             this.Controls.Add(this.Domicilio);
             this.Controls.Add(this.Email);
-            this.Controls.Add(this.FechaNac);
             this.Controls.Add(this.Nombre);
             this.Name = "Vendedores";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Vendedores";
+            this.Load += new System.EventHandler(this.Vendedores_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.toolStripVenta.ResumeLayout(false);
             this.toolStripVenta.PerformLayout();
@@ -230,7 +230,6 @@
         #endregion
         private System.Windows.Forms.TextBox Domicilio;
         private System.Windows.Forms.TextBox Email;
-        private System.Windows.Forms.TextBox FechaNac;
         private System.Windows.Forms.TextBox Nombre;
         private System.Windows.Forms.TextBox Telefono;
         private System.Windows.Forms.DataGridView dataGridView1;
@@ -243,5 +242,6 @@
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Label label10;
+        private System.Windows.Forms.DateTimePicker dateTimePickerFecha;
     }
 }

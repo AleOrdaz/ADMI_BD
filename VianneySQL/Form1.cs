@@ -1,4 +1,4 @@
-﻿using System;
+﻿ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -25,7 +25,7 @@ namespace VianneySQL
         private void ConectarBD()
         {
             string connectionString = null, usuario;
-            usuario = "LAPTOP-OFNE692H\\SQLEXPRESS;";
+            usuario = "ALEJANDRO\\SQLEXPRESS;";
             connectionString = "Server=" + usuario + "Database = Proyecto; Trusted_Connection=true;";
             conexion = new SqlConnection(connectionString);
             try

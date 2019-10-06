@@ -50,6 +50,7 @@
             // dataGridView1
             // 
             this.dataGridView1.AllowUserToAddRows = false;
+            this.dataGridView1.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.DisplayedCells;
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridView1.Location = new System.Drawing.Point(12, 227);
             this.dataGridView1.Name = "dataGridView1";
@@ -183,7 +184,7 @@
             this.Tamaño.Items.AddRange(new object[] {
             "Individual",
             "Matrimonial",
-            "Quenn Size"});
+            "Queen Size"});
             this.Tamaño.Location = new System.Drawing.Point(278, 174);
             this.Tamaño.Name = "Tamaño";
             this.Tamaño.Size = new System.Drawing.Size(110, 21);
