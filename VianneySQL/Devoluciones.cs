@@ -14,25 +14,42 @@ namespace VianneySQL
     public partial class Devoluciones : Form
     {
         SqlConnection conexion2; //Para poder conectar con la BD de SQL
+        DetallesDevolucion detallesDevolucion;
+        Devolucion devolucion;
 
         public Devoluciones(SqlConnection conexion)
         {
             InitializeComponent();
             conexion2 = conexion;
-            MessageBox.Show("Exito");
+            detallesDevolucion = new DetallesDevolucion(conexion2);
+            devolucion = new Devolucion(conexion2);
+            agregaControlDevolucion();
+            agregaControlDetallesDevolucion();
         }
 
-        /**Llamado de las ventas**/
-        private void Producto_Click(object sender, EventArgs e)
+        public void agregaControlDevolucion()
         {
-           // Productos producto = new Productos(conexion2);
-            //producto.Show();
+            panelDevoluciones.Controls.Add(devolucion);
+            devolucion.Dock = DockStyle.Fill;
+            devolucion.BringToFront();
         }
 
-        private void Venta_Click(object sender, EventArgs e)
+        public void agregaControlDetallesDevolucion()
         {
-            //Ventas venta = new Ventas(conexion2);
-            //venta.Show();
+            panelDevoluciones.Controls.Add(detallesDevolucion);
+            detallesDevolucion.Dock = DockStyle.Fill;
+        }
+
+        public void cambiaADetallesDevolucion(int idVenta)
+        {
+            detallesDevolucion.IdDevolucion = idVenta;
+            detallesDevolucion.BringToFront();
+            detallesDevolucion.muestraConsultaDetallesDevolucion();
+        }
+
+        public void cambiaADevolucion()
+        {
+            devolucion.BringToFront();
         }
     }
 }

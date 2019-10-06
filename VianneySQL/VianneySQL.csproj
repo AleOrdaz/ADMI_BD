@@ -52,6 +52,9 @@
     <Compile Include="Clientes.Designer.cs">
       <DependentUpon>Clientes.cs</DependentUpon>
     </Compile>
+    <Compile Include="DetalleDevolucion.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
     <Compile Include="DetallesVenta.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -87,6 +90,9 @@
     <Compile Include="Vendedores.Designer.cs">
       <DependentUpon>Vendedores.cs</DependentUpon>
     </Compile>
+    <Compile Include="Devolucion.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
     <Compile Include="Venta.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -98,6 +104,9 @@
     </Compile>
     <EmbeddedResource Include="Clientes.resx">
       <DependentUpon>Clientes.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="DetalleDevolucion.resx">
+      <DependentUpon>DetalleDevolucion.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="DetallesVenta.resx">
       <DependentUpon>DetallesVenta.cs</DependentUpon>
@@ -125,6 +134,9 @@
     </Compile>
     <EmbeddedResource Include="Vendedores.resx">
       <DependentUpon>Vendedores.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Devolucion.resx">
+      <DependentUpon>Devolucion.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Venta.resx">
       <DependentUpon>Venta.cs</DependentUpon>

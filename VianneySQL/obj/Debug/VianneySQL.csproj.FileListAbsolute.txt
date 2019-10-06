@@ -85,3 +85,5 @@ C:\Users\alejandro\Desktop\ADMI_BD\VianneySQL\obj\Debug\VianneySQL.Vendedores.re
 C:\Users\alejandro\Desktop\ADMI_BD\VianneySQL\obj\Debug\VianneySQL.Venta.resources
 C:\Users\alejandro\Desktop\ADMI_BD\VianneySQL\obj\Debug\VianneySQL.Ventas.resources
 C:\Users\alejandro\Desktop\ADMI_BD\VianneySQL\obj\Debug\VianneySQL.csproj.GenerateResource.cache
+C:\Users\alejandro\Desktop\ADMI_BD\VianneySQL\obj\Debug\VianneySQL.DetallesDevolucion.resources
+C:\Users\alejandro\Desktop\ADMI_BD\VianneySQL\obj\Debug\VianneySQL.Devolucion.resources

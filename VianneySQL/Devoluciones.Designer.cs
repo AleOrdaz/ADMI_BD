@@ -48,6 +48,7 @@
             this.Motivo = new System.Windows.Forms.TextBox();
             this.CanProducto = new System.Windows.Forms.TextBox();
             this.label8 = new System.Windows.Forms.Label();
+            this.panelDevoluciones = new System.Windows.Forms.Panel();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -234,12 +235,23 @@
             this.label8.TabIndex = 46;
             this.label8.Text = "Cantidad";
             // 
+            // panelDevoluciones
+            // 
+            this.panelDevoluciones.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.panelDevoluciones.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panelDevoluciones.Location = new System.Drawing.Point(0, 0);
+            this.panelDevoluciones.Margin = new System.Windows.Forms.Padding(2);
+            this.panelDevoluciones.Name = "panelDevoluciones";
+            this.panelDevoluciones.Size = new System.Drawing.Size(762, 456);
+            this.panelDevoluciones.TabIndex = 48;
+            // 
             // Devoluciones
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.Thistle;
-            this.ClientSize = new System.Drawing.Size(766, 400);
+            this.ClientSize = new System.Drawing.Size(762, 456);
+            this.Controls.Add(this.panelDevoluciones);
             this.Controls.Add(this.CanProducto);
             this.Controls.Add(this.label8);
             this.Controls.Add(this.Motivo);
@@ -290,5 +302,6 @@
         private System.Windows.Forms.TextBox Motivo;
         private System.Windows.Forms.TextBox CanProducto;
         private System.Windows.Forms.Label label8;
+        private System.Windows.Forms.Panel panelDevoluciones;
     }
 }
