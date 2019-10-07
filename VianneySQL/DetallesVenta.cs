@@ -285,17 +285,17 @@ namespace VianneySQL
             {
                 MessageBox.Show(error.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
-            //muestraConsultaDetallesVenta();
+            muestraConsultaDetallesVenta();
         }
 
         private void toolStripButtonModificar_Click(object sender, EventArgs e)
         {
-
+            modificaResgistroDetallesVenta();
         }
 
         private void toolStripButtonEliminar_Click(object sender, EventArgs e)
         {
-
+            eliminaRegistroTablaDetalleVenta();
         }
 
         private void dataGridViewDetallesVenta_CellClick(object sender, DataGridViewCellEventArgs e)
@@ -317,6 +317,56 @@ namespace VianneySQL
                 DataGridViewRow fila = dataGridViewProductos.Rows[indiceFilaProducto];
                 textBoxIdProducto.Text = Convert.ToString(fila.Cells["IdProducto"].Value);
             }
+        }
+
+        private void modificaResgistroDetallesVenta() {
+            if (indiceFila != -1)
+            {
+                DataGridViewRow fila = dataGridViewDetallesVenta.Rows[indiceFila];
+                string query = "UPDATE Transaccion.DetalleVenta SET IdProducto = @idProducto, " +
+                    "Cantidad = @cantidad WHERE idVenta = @idVenta AND IdProducto = @idP;";
+                SqlCommand comando = new SqlCommand(query, conexion);
+                comando.Parameters.AddWithValue("@idProducto", textBoxIdProducto.Text);
+                comando.Parameters.AddWithValue("@cantidad", numericUpDownCantidad.Value);
+                comando.Parameters.AddWithValue("@idVenta", Convert.ToString(fila.Cells["idVenta"].Value));
+                comando.Parameters.AddWithValue("@idP", Convert.ToString(fila.Cells["idProducto"].Value));
+                try
+                {
+                    comando.ExecuteNonQuery();
+                }
+                catch (Exception error)
+                {
+                    MessageBox.Show(error.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
+            else
+            {
+                MessageBox.Show("Selecciona una fila primero", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            muestraConsultaDetallesVenta();
+        }
+        public void eliminaRegistroTablaDetalleVenta() {
+            if (indiceFila != -1)
+            {
+                DataGridViewRow fila = dataGridViewDetallesVenta.Rows[indiceFila];
+                string query = "DELETE FROM Transaccion.DetalleVenta WHERE idVenta = @idVenta AND IdProducto = @idP;";
+                SqlCommand comando = new SqlCommand(query, conexion);
+                comando.Parameters.AddWithValue("@idVenta", Convert.ToString(fila.Cells["idVenta"].Value));
+                comando.Parameters.AddWithValue("@idP", Convert.ToString(fila.Cells["idProducto"].Value));
+                try
+                {
+                    comando.ExecuteNonQuery();
+                }
+                catch (Exception error)
+                {
+                    MessageBox.Show(error.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
+            else
+            {
+                MessageBox.Show("Selecciona una fila primero", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            muestraConsultaDetallesVenta();
         }
     }
 }

@@ -317,7 +317,7 @@ namespace VianneySQL
             insertaDatosDataGridView(query);
         }
 
-        private void muestraConsulta()
+        public void muestraConsulta()
         {
             string query = "SELECT * FROM Transaccion.Venta;";
             SqlCommand comando = new SqlCommand(query, conexion);
@@ -339,7 +339,7 @@ namespace VianneySQL
         private void dataGridViewInformacion_CellClick(object sender, DataGridViewCellEventArgs e)
         {
             indiceFilaInformacion = e.RowIndex;
-            if (indiceFilaInformacion != -1) {
+            if (indiceFilaInformacion != -1 && indiceFilaInformacion != 0) {
                 DataGridViewRow fila = dataGridViewInformacion.Rows[indiceFilaInformacion];
                 switch (bandera) {
                     case 1:
@@ -457,9 +457,11 @@ namespace VianneySQL
             if (indiceFila != -1)
             {
                 DataGridViewRow fila = dataGridViewVentas.Rows[indiceFila];
+                string idVenta = Convert.ToString(fila.Cells["IdVenta"].Value);
+                eliminaTablaDetalleVenta(idVenta);
                 string query = "DELETE FROM Transaccion.Venta WHERE IdVenta = @idVenta;";
                 SqlCommand comando = new SqlCommand(query, conexion);
-                comando.Parameters.AddWithValue("@idVenta", Convert.ToString(fila.Cells["IdVenta"].Value));
+                comando.Parameters.AddWithValue("@idVenta", idVenta);
                 try
                 {
                     comando.ExecuteNonQuery();
@@ -472,6 +474,20 @@ namespace VianneySQL
             else
             {
                 MessageBox.Show("Selecciona una fila primero", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        public void eliminaTablaDetalleVenta(string idVenta) {
+            string query = "DELETE FROM Transaccion.DetalleVenta WHERE idVenta = @idVenta;";
+            SqlCommand comando = new SqlCommand(query, conexion);
+            comando.Parameters.AddWithValue("@idVenta", idVenta);
+            try
+            {
+                comando.ExecuteNonQuery();
+            }
+            catch (Exception error)
+            {
+                MessageBox.Show(error.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
     }

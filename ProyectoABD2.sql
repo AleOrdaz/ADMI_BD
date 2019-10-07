@@ -1,4 +1,4 @@
- --DROP DATABASE Proyecto
+--DROP DATABASE Proyecto
 
 CREATE DATABASE Proyecto;
 USE Proyecto
@@ -128,7 +128,7 @@ SELECT * FROM Transaccion.Cliente
 INSERT INTO Transaccion.Venta(idCliente,idVendedor,Fecha,TOTAL) VALUES(1,1,'2019-09-16',NULL)
 SELECT * FROM Transaccion.Venta
 SELECT * FROM Transaccion.DetalleVenta
-INSERT INTO Transaccion.DetalleVenta (idVenta,idProducto,Cantidad,Subtotal)VALUES (6,1,2,NULL)
+INSERT INTO Transaccion.DetalleVenta (idVenta,idProducto,Cantidad,Subtotal)VALUES (2,1,2,NULL)
 
 DELETE FROM Transaccion.DetalleVenta
 --		TRIGGER DE DEVOLUCION DE PRODUCTOS AUMENTO DE STOCK

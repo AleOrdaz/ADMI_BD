@@ -65,16 +65,16 @@ namespace VianneySQL
             this.labelIdVenta.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(121)))), ((int)(((byte)(33)))), ((int)(((byte)(109)))));
             this.labelIdVenta.Location = new System.Drawing.Point(3, 102);
             this.labelIdVenta.Name = "labelIdVenta";
-            this.labelIdVenta.Size = new System.Drawing.Size(52, 20);
+            this.labelIdVenta.Size = new System.Drawing.Size(64, 25);
             this.labelIdVenta.TabIndex = 1;
             this.labelIdVenta.Text = "Venta";
             // 
             // textBoxIdVenta
             // 
-            this.textBoxIdVenta.Location = new System.Drawing.Point(61, 102);
+            this.textBoxIdVenta.Location = new System.Drawing.Point(79, 102);
             this.textBoxIdVenta.Name = "textBoxIdVenta";
             this.textBoxIdVenta.ReadOnly = true;
-            this.textBoxIdVenta.Size = new System.Drawing.Size(100, 20);
+            this.textBoxIdVenta.Size = new System.Drawing.Size(100, 22);
             this.textBoxIdVenta.TabIndex = 2;
             this.textBoxIdVenta.TextChanged += new System.EventHandler(this.textBoxIdVendedor_TextChanged);
             // 
@@ -85,7 +85,7 @@ namespace VianneySQL
             this.labelMotivo.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(121)))), ((int)(((byte)(33)))), ((int)(((byte)(109)))));
             this.labelMotivo.Location = new System.Drawing.Point(3, 143);
             this.labelMotivo.Name = "labelMotivo";
-            this.labelMotivo.Size = new System.Drawing.Size(55, 20);
+            this.labelMotivo.Size = new System.Drawing.Size(70, 25);
             this.labelMotivo.TabIndex = 3;
             this.labelMotivo.Text = "Motivo";
             // 
@@ -96,15 +96,15 @@ namespace VianneySQL
             this.label1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(121)))), ((int)(((byte)(33)))), ((int)(((byte)(109)))));
             this.label1.Location = new System.Drawing.Point(176, 100);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(54, 20);
+            this.label1.Size = new System.Drawing.Size(67, 25);
             this.label1.TabIndex = 5;
             this.label1.Text = "Fecha";
             // 
             // dateTimePickerFechaVenta
             // 
-            this.dateTimePickerFechaVenta.Location = new System.Drawing.Point(236, 102);
+            this.dateTimePickerFechaVenta.Location = new System.Drawing.Point(249, 102);
             this.dateTimePickerFechaVenta.Name = "dateTimePickerFechaVenta";
-            this.dateTimePickerFechaVenta.Size = new System.Drawing.Size(198, 20);
+            this.dateTimePickerFechaVenta.Size = new System.Drawing.Size(198, 22);
             this.dateTimePickerFechaVenta.TabIndex = 6;
             // 
             // toolStripButtonAgregar
@@ -113,7 +113,7 @@ namespace VianneySQL
             this.toolStripButtonAgregar.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.toolStripButtonAgregar.Name = "toolStripButtonAgregar";
             this.toolStripButtonAgregar.Overflow = System.Windows.Forms.ToolStripItemOverflow.Never;
-            this.toolStripButtonAgregar.Size = new System.Drawing.Size(85, 36);
+            this.toolStripButtonAgregar.Size = new System.Drawing.Size(99, 36);
             this.toolStripButtonAgregar.Text = "Agregar";
             this.toolStripButtonAgregar.TextDirection = System.Windows.Forms.ToolStripTextDirection.Horizontal;
             this.toolStripButtonAgregar.Click += new System.EventHandler(this.toolStripButtonAgregar_Click);
@@ -123,7 +123,7 @@ namespace VianneySQL
             this.toolStripButtonModificar.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButtonModificar.Image")));
             this.toolStripButtonModificar.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.toolStripButtonModificar.Name = "toolStripButtonModificar";
-            this.toolStripButtonModificar.Size = new System.Drawing.Size(94, 36);
+            this.toolStripButtonModificar.Size = new System.Drawing.Size(109, 36);
             this.toolStripButtonModificar.Text = "Modificar";
             this.toolStripButtonModificar.Click += new System.EventHandler(this.toolStripButtonModificar_Click);
             // 
@@ -132,7 +132,7 @@ namespace VianneySQL
             this.toolStripButtonEliminar.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButtonEliminar.Image")));
             this.toolStripButtonEliminar.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.toolStripButtonEliminar.Name = "toolStripButtonEliminar";
-            this.toolStripButtonEliminar.Size = new System.Drawing.Size(86, 36);
+            this.toolStripButtonEliminar.Size = new System.Drawing.Size(99, 36);
             this.toolStripButtonEliminar.Text = "Eliminar";
             this.toolStripButtonEliminar.Click += new System.EventHandler(this.toolStripButtonEliminar_Click);
             // 
@@ -157,7 +157,7 @@ namespace VianneySQL
             this.toolStripButtonDetallesDevolucion.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButtonDetallesDevolucion.Image")));
             this.toolStripButtonDetallesDevolucion.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.toolStripButtonDetallesDevolucion.Name = "toolStripButtonDetallesDevolucion";
-            this.toolStripButtonDetallesDevolucion.Size = new System.Drawing.Size(147, 36);
+            this.toolStripButtonDetallesDevolucion.Size = new System.Drawing.Size(178, 36);
             this.toolStripButtonDetallesDevolucion.Text = "Detalles Devolución";
             this.toolStripButtonDetallesDevolucion.Click += new System.EventHandler(this.toolStripButtonDetallesVenta_Click);
             // 
@@ -183,13 +183,13 @@ namespace VianneySQL
             this.buttonVerVentas.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(121)))), ((int)(((byte)(33)))), ((int)(((byte)(109)))));
             this.buttonVerVentas.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.buttonVerVentas.ForeColor = System.Drawing.Color.White;
-            this.buttonVerVentas.Location = new System.Drawing.Point(29, 60);
+            this.buttonVerVentas.Location = new System.Drawing.Point(34, 69);
             this.buttonVerVentas.Name = "buttonVerVentas";
             this.buttonVerVentas.Size = new System.Drawing.Size(106, 27);
             this.buttonVerVentas.TabIndex = 8;
             this.buttonVerVentas.Text = "Ver Ventas";
             this.buttonVerVentas.UseVisualStyleBackColor = false;
-            this.buttonVerVentas.Click += new System.EventHandler(this.buttonVerVendedores_Click);
+            this.buttonVerVentas.Click += new System.EventHandler(this.buttonVerVentas_Click);
             // 
             // groupBoxVentas
             // 
@@ -208,26 +208,27 @@ namespace VianneySQL
             this.dataGridViewVentas.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dataGridViewVentas.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridViewVentas.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dataGridViewVentas.Location = new System.Drawing.Point(3, 16);
+            this.dataGridViewVentas.Location = new System.Drawing.Point(3, 18);
             this.dataGridViewVentas.Name = "dataGridViewVentas";
             this.dataGridViewVentas.ReadOnly = true;
             this.dataGridViewVentas.RowHeadersVisible = false;
             this.dataGridViewVentas.RowHeadersWidth = 51;
             this.dataGridViewVentas.RowTemplate.Height = 24;
-            this.dataGridViewVentas.Size = new System.Drawing.Size(734, 249);
+            this.dataGridViewVentas.Size = new System.Drawing.Size(734, 247);
             this.dataGridViewVentas.TabIndex = 0;
             this.dataGridViewVentas.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridViewVentas_CellClick);
             // 
             // textBoxMotivo
             // 
-            this.textBoxMotivo.Location = new System.Drawing.Point(61, 143);
+            this.textBoxMotivo.Location = new System.Drawing.Point(79, 143);
             this.textBoxMotivo.Multiline = true;
             this.textBoxMotivo.Name = "textBoxMotivo";
-            this.textBoxMotivo.Size = new System.Drawing.Size(373, 70);
+            this.textBoxMotivo.Size = new System.Drawing.Size(368, 70);
             this.textBoxMotivo.TabIndex = 11;
             // 
             // contextMenuStrip1
             // 
+            this.contextMenuStrip1.ImageScalingSize = new System.Drawing.Size(20, 20);
             this.contextMenuStrip1.Name = "contextMenuStrip1";
             this.contextMenuStrip1.Size = new System.Drawing.Size(61, 4);
             // 
@@ -286,15 +287,15 @@ namespace VianneySQL
         {
             if (indiceFila != -1)
             {
-                eliminaRegistroTablaVenta();
+                eliminaRegistroTablaDevolucion();
                 muestraConsulta();
             }
         }
 
-        private void buttonVerVendedores_Click(object sender, EventArgs e)
+        private void buttonVerVentas_Click(object sender, EventArgs e)
         {
             bandera = 1;
-            string query = "SELECT v.IdVenta FROM Transaccion.Venta v;";
+            string query = "SELECT v.IdVenta, v.IdCliente, v.IdVendedor, v.Fecha FROM Transaccion.Venta v;";
             insertaDatosDataGridView(query);
         }
 
@@ -384,11 +385,11 @@ namespace VianneySQL
             if (indiceFila != -1)
             {
                 DataGridViewRow fila = dataGridViewVentas.Rows[indiceFila];
-                string query = "UPDATE Transaccion.Venta SET IdVenta = @idVenta, " +
+                string query = "UPDATE Almacen.Devolucion SET IdVenta = @venta, " +
                     "Motivo = @Motivo, Fecha = @fecha " +
                     "WHERE IdVenta = @idVenta;";
                 SqlCommand comando = new SqlCommand(query, conexion);
-                comando.Parameters.AddWithValue("@idVenta", textBoxIdVenta.Text);
+                comando.Parameters.AddWithValue("@venta", textBoxIdVenta.Text);
                 comando.Parameters.AddWithValue("@Motivo", textBoxMotivo.Text);
                 comando.Parameters.AddWithValue("@fecha", dateTimePickerFechaVenta.Value.ToString("MM/dd/yyyy"));
                 comando.Parameters.AddWithValue("@idVenta", Convert.ToString(fila.Cells["IdVenta"].Value));
@@ -405,14 +406,17 @@ namespace VianneySQL
             {
                 MessageBox.Show("Selecciona una fila primero", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
+            muestraConsulta();
         }
-        private void eliminaRegistroTablaVenta() {
+        private void eliminaRegistroTablaDevolucion() {
             if (indiceFila != -1)
             {
                 DataGridViewRow fila = dataGridViewVentas.Rows[indiceFila];
-                string query = "DELETE FROM Transaccion.Venta WHERE IdVenta = @idVenta;";
+                string idDevolucion = Convert.ToString(fila.Cells["idDevolucion"].Value);
+                eliminaTablaDetalleDevolucion(idDevolucion);
+                string query = "DELETE FROM Almacen.Devolucion WHERE idDevolucion = @idDevolucion;";
                 SqlCommand comando = new SqlCommand(query, conexion);
-                comando.Parameters.AddWithValue("@idVenta", Convert.ToString(fila.Cells["IdVenta"].Value));
+                comando.Parameters.AddWithValue("@idDevolucion", idDevolucion);
                 try
                 {
                     comando.ExecuteNonQuery();
@@ -425,6 +429,20 @@ namespace VianneySQL
             else
             {
                 MessageBox.Show("Selecciona una fila primero", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private void eliminaTablaDetalleDevolucion(string idDevolucion) {
+            string query = "DELETE FROM Almacen.DetalleDevolucion WHERE idDevolucion = @idDevolucion;";
+            SqlCommand comando = new SqlCommand(query, conexion);
+            comando.Parameters.AddWithValue("@idDevolucion", idDevolucion);
+            try
+            {
+                comando.ExecuteNonQuery();
+            }
+            catch (Exception error)
+            {
+                MessageBox.Show(error.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
     }

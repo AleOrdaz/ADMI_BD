@@ -21,10 +21,9 @@ namespace VianneySQL
         {
             InitializeComponent();
             conexion2 = conexion;
-            detallesDevolucion = new DetallesDevolucion(conexion2);
+            
             devolucion = new Devolucion(conexion2);
             agregaControlDevolucion();
-            agregaControlDetallesDevolucion();
         }
 
         public void agregaControlDevolucion()
@@ -36,13 +35,18 @@ namespace VianneySQL
 
         public void agregaControlDetallesDevolucion()
         {
-            panelDevoluciones.Controls.Add(detallesDevolucion);
-            detallesDevolucion.Dock = DockStyle.Fill;
+            if (!panelDevoluciones.Contains(detallesDevolucion)) {
+                panelDevoluciones.Controls.Add(detallesDevolucion);
+                detallesDevolucion.Dock = DockStyle.Fill;
+            }   
         }
 
         public void cambiaADetallesDevolucion(int idVenta)
         {
+            detallesDevolucion = new DetallesDevolucion(conexion2);
+            agregaControlDetallesDevolucion();
             detallesDevolucion.IdDevolucion = idVenta;
+            detallesDevolucion.muestraConsultaProductos();
             detallesDevolucion.BringToFront();
             detallesDevolucion.muestraConsultaDetallesDevolucion();
         }

@@ -9,7 +9,7 @@ using System.Windows.Forms;
 
 namespace VianneySQL
 {
-    class DetallesDevolucion:UserControl
+    class DetallesDevolucion : UserControl
     {
         #region Controles
         private ToolStrip toolStripVenta;
@@ -27,7 +27,7 @@ namespace VianneySQL
         private DataGridView dataGridViewDetallesVenta;
         #endregion
         private SqlConnection conexion;
-        private int indiceFila, indiceFilaProducto, idDevolucion; 
+        private int indiceFila, indiceFilaProducto, idDevolucion, idVenta;
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(DetallesDevolucion));
@@ -233,9 +233,14 @@ namespace VianneySQL
 
         }
 
-        public int IdDevolucion{
+        public int IdDevolucion {
             get { return idDevolucion; }
             set { idDevolucion = value; }
+        } 
+
+        public int IdVenta {
+            get { return idVenta; }
+            set { idVenta = value; }
         }
 
         public DetallesDevolucion(SqlConnection conexion) {
@@ -251,10 +256,18 @@ namespace VianneySQL
             ((Devoluciones)padre).cambiaADevolucion();
         }
 
-        private void muestraConsultaProductos() {
-            string query = "SELECT p.IdProducto, tp.Nombre, p.Precio, p.Tamaño, p.Stock, tp.Descripcion " +
-                            "FROM Almacen.Producto p INNER JOIN Almacen.TipoProducto tp ON p.IdTipoProducto = tp.IdTipoProducto;";
+        public void muestraConsultaProductos() {
+            string query = "SELECT Consulta.idProducto, Consulta.Nombre, Consulta.Precio, Consulta.Tamaño, Consulta.Descripcion, dv.Cantidad " +
+                " FROM Transaccion.DetalleVenta dv" +
+                " INNER JOIN" +
+                " (SELECT p.idProducto, tp.Nombre, p.Precio, p.Tamaño, tp.Descripcion" +
+                " FROM Almacen.TipoProducto tp" +
+                " INNER JOIN Almacen.Producto p" +
+                " ON p.idTipoProducto = tp.idTipoProducto) AS Consulta" +
+                " ON Consulta.idProducto = dv.idProducto" +
+                " WHERE dv.idVenta = @idVenta;";
             SqlCommand comando = new SqlCommand(query, conexion);
+            comando.Parameters.AddWithValue("@idVenta", idDevolucion);
             SqlDataAdapter adaptador = new SqlDataAdapter(comando);
             DataTable tabla = new DataTable();
             adaptador.Fill(tabla);
@@ -286,17 +299,61 @@ namespace VianneySQL
             {
                 MessageBox.Show(error.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
-            //muestraConsultaDetallesVenta();
+            muestraConsultaDetallesDevolucion();
         }
 
         private void toolStripButtonModificar_Click(object sender, EventArgs e)
         {
-
+            if (indiceFila != -1)
+            {
+                DataGridViewRow fila = dataGridViewDetallesVenta.Rows[indiceFila];
+                string query = "UPDATE Almacen.DetalleDevolucion SET IdProducto = @idProducto, " +
+                    "Cantidad = @cantidad WHERE idDevolucion = @idVenta AND IdProducto = @idP;";
+                SqlCommand comando = new SqlCommand(query, conexion);
+                comando.Parameters.AddWithValue("@idProducto", textBoxIdProducto.Text);
+                comando.Parameters.AddWithValue("@cantidad", numericUpDownCantidad.Value);
+                comando.Parameters.AddWithValue("@idVenta", Convert.ToString(fila.Cells["idDevolucion"].Value));
+                comando.Parameters.AddWithValue("@idP", Convert.ToString(fila.Cells["idProducto"].Value));
+                try
+                {
+                    comando.ExecuteNonQuery();
+                }
+                catch (Exception error)
+                {
+                    MessageBox.Show(error.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
+            else
+            {
+                MessageBox.Show("Selecciona una fila primero", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            muestraConsultaDetallesDevolucion();
+            
         }
 
         private void toolStripButtonEliminar_Click(object sender, EventArgs e)
         {
-
+            if (indiceFila != -1)
+            {
+                DataGridViewRow fila = dataGridViewDetallesVenta.Rows[indiceFila];
+                string query = "DELETE FROM Almacen.DetalleDevolucion WHERE idDevolucion = @idVenta AND IdProducto = @idP;";
+                SqlCommand comando = new SqlCommand(query, conexion);
+                comando.Parameters.AddWithValue("@idVenta", Convert.ToString(fila.Cells["idDevolucion"].Value));
+                comando.Parameters.AddWithValue("@idP", Convert.ToString(fila.Cells["idProducto"].Value));
+                try
+                {
+                    comando.ExecuteNonQuery();
+                }
+                catch (Exception error)
+                {
+                    MessageBox.Show(error.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
+            else
+            {
+                MessageBox.Show("Selecciona una fila primero", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            muestraConsultaDetallesDevolucion();
         }
 
         private void dataGridViewDetallesVenta_CellClick(object sender, DataGridViewCellEventArgs e)
@@ -317,6 +374,7 @@ namespace VianneySQL
             {
                 DataGridViewRow fila = dataGridViewProductos.Rows[indiceFilaProducto];
                 textBoxIdProducto.Text = Convert.ToString(fila.Cells["IdProducto"].Value);
+                numericUpDownCantidad.Maximum = int.Parse(Convert.ToString(fila.Cells["Cantidad"].Value));
             }
         }
     }

@@ -59,6 +59,7 @@ namespace VianneySQL
 
         public void cambiaAVenta() {
             venta.BringToFront();
+            venta.muestraConsulta();
         }
     }
 }
