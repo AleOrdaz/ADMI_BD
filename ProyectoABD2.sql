@@ -40,7 +40,7 @@ CREATE TABLE Almacen.TipoProducto
 
 CREATE TABLE Almacen.Producto
 (
-	idProducto  BIGINT IDENTITY NOT NULL,
+	idProducto  BIGINT IDENTITY(1,1) NOT NULL,
 	idTipoProducto BIGINT NOT NULL,
 	Stock INT NOT NULL,
 	Tamaño VARCHAR(50) NOT NULL,
@@ -89,7 +89,7 @@ CREATE TABLE Almacen.Devolucion
 	Cantidad INT NOT NULL,
 	Subtotal INT NULL,
 	CONSTRAINT FK_DEVOLUCCION FOREIGN KEY(idDevolucion) REFERENCES Almacen.Devolucion(idDevolucion),
-	CONSTRAINT FK_VENTA4 FOREIGN KEY(idProducto) REFERENCES Almacen.Producto
+	CONSTRAINT FK_VENTA4 FOREIGN KEY(idProducto) REFERENCES Almacen.Producto(idProducto)
  )
 
  ---TRIGGERS
@@ -98,9 +98,17 @@ CREATE TABLE Almacen.Devolucion
 @ID AS BIGINT SELECT @ID=idVendedor FROM inserted UPDATE Almacen.Vendedor
 SET Edad = CAST(DATEDIFF(dd,FechaNac,GETDATE()) / 365.25 as int) WHERE idVendedor=@ID END
 
+CREATE TRIGGER Almacen.calculaEdadMod ON Almacen.Vendedor AFTER UPDATE AS BEGIN SET NOCOUNT ON DECLARE
+@ID AS BIGINT SELECT @ID=idVendedor FROM inserted UPDATE Almacen.Vendedor
+SET Edad = CAST(DATEDIFF(dd,FechaNac,GETDATE()) / 365.25 as int) WHERE idVendedor=@ID END
+
 
 ----		EDAD CLIENTE
 CREATE TRIGGER Transaccion.calculaEdad ON Transaccion.Cliente AFTER INSERT AS BEGIN SET NOCOUNT ON DECLARE
+@ID AS BIGINT SELECT @ID=idCliente FROM inserted UPDATE Transaccion.Cliente
+SET Edad = CAST(DATEDIFF(dd,FechaNac,GETDATE()) / 365.25 as int) WHERE idCliente=@ID END
+
+CREATE TRIGGER Transaccion.calculaEdadMod ON Transaccion.Cliente AFTER UPDATE AS BEGIN SET NOCOUNT ON DECLARE
 @ID AS BIGINT SELECT @ID=idCliente FROM inserted UPDATE Transaccion.Cliente
 SET Edad = CAST(DATEDIFF(dd,FechaNac,GETDATE()) / 365.25 as int) WHERE idCliente=@ID END
 

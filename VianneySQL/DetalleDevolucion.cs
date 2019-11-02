@@ -257,6 +257,8 @@ namespace VianneySQL
         }
 
         public void muestraConsultaProductos() {
+            /*string query = "SELECT P.idProducto, TP.Nombre, P.Precio, P.Tamaño, TP.Descripcion, P.Cantidad " +
+                "FROM Almacen.TipoProducto TP INNER JOIN  "*/
             string query = "SELECT Consulta.idProducto, Consulta.Nombre, Consulta.Precio, Consulta.Tamaño, Consulta.Descripcion, dv.Cantidad " +
                 " FROM Transaccion.DetalleVenta dv" +
                 " INNER JOIN" +
