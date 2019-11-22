@@ -41,11 +41,12 @@ namespace VianneySQL
             }   
         }
 
-        public void cambiaADetallesDevolucion(int idVenta)
+        public void cambiaADetallesDevolucion(int idVenta, int idDevolucion)
         {
             detallesDevolucion = new DetallesDevolucion(conexion2);
             agregaControlDetallesDevolucion();
-            detallesDevolucion.IdDevolucion = idVenta;
+            detallesDevolucion.IdVenta = idVenta;
+            detallesDevolucion.IdDevolucion = idDevolucion;
             detallesDevolucion.muestraConsultaProductos();
             detallesDevolucion.BringToFront();
             detallesDevolucion.muestraConsultaDetallesDevolucion();
@@ -54,6 +55,7 @@ namespace VianneySQL
         public void cambiaADevolucion()
         {
             devolucion.BringToFront();
+            devolucion.muestraConsulta();
         }
     }
 }

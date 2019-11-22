@@ -184,7 +184,7 @@
             this.Tamaño.Items.AddRange(new object[] {
             "Individual",
             "Matrimonial",
-            "Queen Size"});
+            "QueenSize"});
             this.Tamaño.Location = new System.Drawing.Point(278, 174);
             this.Tamaño.Name = "Tamaño";
             this.Tamaño.Size = new System.Drawing.Size(110, 21);

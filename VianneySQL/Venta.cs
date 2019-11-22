@@ -458,7 +458,6 @@ namespace VianneySQL
             {
                 DataGridViewRow fila = dataGridViewVentas.Rows[indiceFila];
                 string idVenta = Convert.ToString(fila.Cells["IdVenta"].Value);
-                eliminaTablaDetalleVenta(idVenta);
                 string query = "DELETE FROM Transaccion.Venta WHERE IdVenta = @idVenta;";
                 SqlCommand comando = new SqlCommand(query, conexion);
                 comando.Parameters.AddWithValue("@idVenta", idVenta);
@@ -474,20 +473,6 @@ namespace VianneySQL
             else
             {
                 MessageBox.Show("Selecciona una fila primero", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-        }
-
-        public void eliminaTablaDetalleVenta(string idVenta) {
-            string query = "DELETE FROM Transaccion.DetalleVenta WHERE idVenta = @idVenta;";
-            SqlCommand comando = new SqlCommand(query, conexion);
-            comando.Parameters.AddWithValue("@idVenta", idVenta);
-            try
-            {
-                comando.ExecuteNonQuery();
-            }
-            catch (Exception error)
-            {
-                MessageBox.Show(error.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
     }

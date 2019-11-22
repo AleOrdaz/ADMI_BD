@@ -15,6 +15,7 @@ namespace VianneySQL
     {
         SqlConnection conexion2; //Para poder conectar con la BD de SQL
         bool seleccion = false;
+        private int indiceFila;
 
         public Vendedores(SqlConnection conexion)
         { 
@@ -22,6 +23,7 @@ namespace VianneySQL
             conexion2 = conexion;
             Datos();
             toolStripButtonModificar.Enabled = toolStripButtonEliminar.Enabled = false;
+            indiceFila = -1;
         }
 
         //Muestra los Datos en el dataGrid 
@@ -32,7 +34,7 @@ namespace VianneySQL
             SqlDataAdapter adapatador = new SqlDataAdapter(comando);
             DataTable tabla = new DataTable();
             adapatador.Fill(tabla);
-            dataGridView1.DataSource = tabla;
+            dataGridViewVendedor.DataSource = tabla;
         }
 
         //Agregar Vendedores
@@ -72,7 +74,7 @@ namespace VianneySQL
                                                               "', Email = '" + Email.Text +
                                                               "', Telefono = '" + Telefono.Text +
                                                               "', FechaNac = '" + dateTimePickerFecha.Value.ToString("MM/dd/yyyy") + "'" +
-                            "WHERE IdVendedor = " + dataGridView1.Rows[dataGridView1.CurrentCell.RowIndex].Cells[0].Value.ToString();
+                            "WHERE IdVendedor = " + dataGridViewVendedor.Rows[dataGridViewVendedor.CurrentCell.RowIndex].Cells[0].Value.ToString();
                 SqlCommand comando = new SqlCommand(query, conexion2);
 
                 try
@@ -99,7 +101,7 @@ namespace VianneySQL
             if (seleccion == true)
             {
                 string query = "DELETE FROM Almacen.Vendedor WHERE IdVendedor ="
-                        + dataGridView1.Rows[dataGridView1.CurrentCell.RowIndex].Cells[0].Value.ToString();
+                        + dataGridViewVendedor.Rows[dataGridViewVendedor.CurrentCell.RowIndex].Cells[0].Value.ToString();
                 SqlCommand comando = new SqlCommand(query, conexion2);
 
                 try
@@ -120,19 +122,23 @@ namespace VianneySQL
             { MessageBox.Show("Seleccionar el elemento a Eliminar", "Error", MessageBoxButtons.OK); }
 }
 
-        //al seleccionar el nombre me da los datos el los texbox
-        private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
-        {
-            seleccion = true;
-            Nombre.Text = dataGridView1.Rows[dataGridView1.CurrentCell.RowIndex].Cells[1].Value.ToString();
-            Domicilio.Text = dataGridView1.Rows[dataGridView1.CurrentCell.RowIndex].Cells[2].Value.ToString();
-            Email.Text = dataGridView1.Rows[dataGridView1.CurrentCell.RowIndex].Cells[3].Value.ToString();
-            Telefono.Text = dataGridView1.Rows[dataGridView1.CurrentCell.RowIndex].Cells[4].Value.ToString();
-            dateTimePickerFecha.Value = DateTime.Parse(Convert.ToString(dataGridView1.Rows[dataGridView1.CurrentCell.RowIndex].Cells[5].Value.ToString()));
-            toolStripButtonEliminar.Enabled = toolStripButtonModificar.Enabled = true;
-        }
-
         private void Vendedores_Load(object sender, EventArgs e)
         {}
+
+        private void dataGridViewVendedor_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            indiceFila = e.RowIndex;
+            if (indiceFila != -1)
+            {
+                DataGridViewRow fila = dataGridViewVendedor.Rows[indiceFila];
+                Nombre.Text = Convert.ToString(fila.Cells["Nombre"].Value);
+                Domicilio.Text = Convert.ToString(fila.Cells["Domicilio"].Value);
+                dateTimePickerFecha.Value = DateTime.Parse(Convert.ToString(fila.Cells["FechaNac"].Value));
+                Email.Text = Convert.ToString(fila.Cells["Email"].Value);
+                Telefono.Text = Convert.ToString(fila.Cells["Telefono"].Value);
+                seleccion = true;
+                toolStripButtonEliminar.Enabled = toolStripButtonModificar.Enabled = true;
+            }
+        }
     }
 }

@@ -25,7 +25,7 @@ namespace VianneySQL
         private void ConectarBD()
         {
             string connectionString = null, usuario;
-            usuario = "ALEJANDRO\\SQLEXPRESS;";
+            usuario = "LAPTOP-OFNE692H\\SQLEXPRESS;";
 
             connectionString = "Server=" + usuario + "Database = Proyecto; Trusted_Connection=true;";
             conexion = new SqlConnection(connectionString);

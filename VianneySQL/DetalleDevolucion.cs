@@ -247,7 +247,7 @@ namespace VianneySQL
             InitializeComponent();
             this.conexion = conexion;
             indiceFila = indiceFilaProducto = -1;
-            muestraConsultaProductos();
+            
         }
 
         private void toolStripButtonVentas_Click(object sender, EventArgs e)
@@ -269,7 +269,7 @@ namespace VianneySQL
                 " ON Consulta.idProducto = dv.idProducto" +
                 " WHERE dv.idVenta = @idVenta;";
             SqlCommand comando = new SqlCommand(query, conexion);
-            comando.Parameters.AddWithValue("@idVenta", idDevolucion);
+            comando.Parameters.AddWithValue("@idVenta", idVenta);
             SqlDataAdapter adaptador = new SqlDataAdapter(comando);
             DataTable tabla = new DataTable();
             adaptador.Fill(tabla);

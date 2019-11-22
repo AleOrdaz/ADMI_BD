@@ -19,14 +19,14 @@ namespace VianneySQL
         private ToolStrip toolStripVenta;
         private DataGridView dataGridViewInformacion;
         private Button buttonVerVentas;
-        private GroupBox groupBoxVentas;
+        private GroupBox groupBoxDevolucion;
         private ToolStripButton toolStripButtonDetallesDevolucion;
-        private DataGridView dataGridViewVentas;
+        private DataGridView dataGridViewDevolucion;
         #endregion
 
         SqlConnection conexion; //Para poder conectar con la BD de SQL
         private uint bandera;
-        private int indiceFilaInformacion, indiceFila, idDevolucion;
+        private int indiceFilaInformacion, indiceFila, idDevolucion, idVenta;
         private bool idClienteValido, idVendedorValido;
         private TextBox textBoxMotivo;
         private ContextMenuStrip contextMenuStrip1;
@@ -48,14 +48,14 @@ namespace VianneySQL
             this.toolStripButtonDetallesDevolucion = new System.Windows.Forms.ToolStripButton();
             this.dataGridViewInformacion = new System.Windows.Forms.DataGridView();
             this.buttonVerVentas = new System.Windows.Forms.Button();
-            this.groupBoxVentas = new System.Windows.Forms.GroupBox();
-            this.dataGridViewVentas = new System.Windows.Forms.DataGridView();
+            this.groupBoxDevolucion = new System.Windows.Forms.GroupBox();
+            this.dataGridViewDevolucion = new System.Windows.Forms.DataGridView();
             this.textBoxMotivo = new System.Windows.Forms.TextBox();
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.toolStripVenta.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewInformacion)).BeginInit();
-            this.groupBoxVentas.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewVentas)).BeginInit();
+            this.groupBoxDevolucion.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewDevolucion)).BeginInit();
             this.SuspendLayout();
             // 
             // labelIdVenta
@@ -191,32 +191,32 @@ namespace VianneySQL
             this.buttonVerVentas.UseVisualStyleBackColor = false;
             this.buttonVerVentas.Click += new System.EventHandler(this.buttonVerVentas_Click);
             // 
-            // groupBoxVentas
+            // groupBoxDevolucion
             // 
-            this.groupBoxVentas.Controls.Add(this.dataGridViewVentas);
-            this.groupBoxVentas.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(121)))), ((int)(((byte)(33)))), ((int)(((byte)(109)))));
-            this.groupBoxVentas.Location = new System.Drawing.Point(3, 232);
-            this.groupBoxVentas.Name = "groupBoxVentas";
-            this.groupBoxVentas.Size = new System.Drawing.Size(740, 268);
-            this.groupBoxVentas.TabIndex = 10;
-            this.groupBoxVentas.TabStop = false;
-            this.groupBoxVentas.Text = "Ventas";
+            this.groupBoxDevolucion.Controls.Add(this.dataGridViewDevolucion);
+            this.groupBoxDevolucion.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(121)))), ((int)(((byte)(33)))), ((int)(((byte)(109)))));
+            this.groupBoxDevolucion.Location = new System.Drawing.Point(3, 232);
+            this.groupBoxDevolucion.Name = "groupBoxDevolucion";
+            this.groupBoxDevolucion.Size = new System.Drawing.Size(740, 268);
+            this.groupBoxDevolucion.TabIndex = 10;
+            this.groupBoxDevolucion.TabStop = false;
+            this.groupBoxDevolucion.Text = "Devolución";
             // 
-            // dataGridViewVentas
+            // dataGridViewDevolucion
             // 
-            this.dataGridViewVentas.AllowUserToAddRows = false;
-            this.dataGridViewVentas.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
-            this.dataGridViewVentas.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridViewVentas.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dataGridViewVentas.Location = new System.Drawing.Point(3, 18);
-            this.dataGridViewVentas.Name = "dataGridViewVentas";
-            this.dataGridViewVentas.ReadOnly = true;
-            this.dataGridViewVentas.RowHeadersVisible = false;
-            this.dataGridViewVentas.RowHeadersWidth = 51;
-            this.dataGridViewVentas.RowTemplate.Height = 24;
-            this.dataGridViewVentas.Size = new System.Drawing.Size(734, 247);
-            this.dataGridViewVentas.TabIndex = 0;
-            this.dataGridViewVentas.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridViewVentas_CellClick);
+            this.dataGridViewDevolucion.AllowUserToAddRows = false;
+            this.dataGridViewDevolucion.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            this.dataGridViewDevolucion.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridViewDevolucion.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.dataGridViewDevolucion.Location = new System.Drawing.Point(3, 18);
+            this.dataGridViewDevolucion.Name = "dataGridViewDevolucion";
+            this.dataGridViewDevolucion.ReadOnly = true;
+            this.dataGridViewDevolucion.RowHeadersVisible = false;
+            this.dataGridViewDevolucion.RowHeadersWidth = 51;
+            this.dataGridViewDevolucion.RowTemplate.Height = 24;
+            this.dataGridViewDevolucion.Size = new System.Drawing.Size(734, 247);
+            this.dataGridViewDevolucion.TabIndex = 0;
+            this.dataGridViewDevolucion.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridViewVentas_CellClick);
             // 
             // textBoxMotivo
             // 
@@ -236,7 +236,7 @@ namespace VianneySQL
             // 
             this.BackColor = System.Drawing.Color.Thistle;
             this.Controls.Add(this.textBoxMotivo);
-            this.Controls.Add(this.groupBoxVentas);
+            this.Controls.Add(this.groupBoxDevolucion);
             this.Controls.Add(this.buttonVerVentas);
             this.Controls.Add(this.dataGridViewInformacion);
             this.Controls.Add(this.dateTimePickerFechaVenta);
@@ -251,8 +251,8 @@ namespace VianneySQL
             this.toolStripVenta.ResumeLayout(false);
             this.toolStripVenta.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewInformacion)).EndInit();
-            this.groupBoxVentas.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewVentas)).EndInit();
+            this.groupBoxDevolucion.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewDevolucion)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -262,11 +262,11 @@ namespace VianneySQL
             InitializeComponent();
             this.conexion = conexion;
             bandera = 0;
-            indiceFilaInformacion = indiceFila = idDevolucion = -1;
+            indiceFilaInformacion = indiceFila = idDevolucion = idVenta =  -1;
             idClienteValido = idVendedorValido = false;
             toolStripButtonAgregar.Enabled = toolStripButtonModificar.Enabled = toolStripButtonEliminar.Enabled = false;
             muestraConsulta();
-            if (dataGridViewVentas.Columns.Count != 0) {
+            if (dataGridViewDevolucion.Columns.Count != 0) {
                 toolStripButtonEliminar.Enabled = true;
             }
         }
@@ -299,14 +299,14 @@ namespace VianneySQL
             insertaDatosDataGridView(query);
         }
 
-        private void muestraConsulta()
+        public void muestraConsulta()
         {
             string query = "SELECT * FROM Almacen.Devolucion;";
             SqlCommand comando = new SqlCommand(query, conexion);
             SqlDataAdapter adaptador = new SqlDataAdapter(comando);
             DataTable tabla = new DataTable();
             adaptador.Fill(tabla);
-            dataGridViewVentas.DataSource = tabla;
+            dataGridViewDevolucion.DataSource = tabla;
         }
 
         private void insertaDatosDataGridView(string query)
@@ -335,10 +335,11 @@ namespace VianneySQL
         {
             indiceFila = e.RowIndex;
             if (indiceFila != -1) {
-                DataGridViewRow fila = dataGridViewVentas.Rows[indiceFila];
+                DataGridViewRow fila = dataGridViewDevolucion.Rows[indiceFila];
                 idDevolucion = int.Parse(Convert.ToString(fila.Cells["IdDevolucion"].Value));
                 textBoxMotivo.Text = Convert.ToString(fila.Cells["Motivo"].Value);
                 textBoxIdVenta.Text = Convert.ToString(fila.Cells["IdVenta"].Value);
+                idVenta = int.Parse(Convert.ToString(fila.Cells["IdVenta"].Value));
                 dateTimePickerFechaVenta.Value = DateTime.Parse(Convert.ToString(fila.Cells["Fecha"].Value));
             }
         }
@@ -373,18 +374,18 @@ namespace VianneySQL
 
         private void toolStripButtonDetallesVenta_Click(object sender, EventArgs e)
         {
-            if (idDevolucion == -1) {
+            if (idVenta == -1) {
                 MessageBox.Show("Selecciona una venta primero", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
             Form padre = (this.Parent.Parent as Form);
-            ((Devoluciones)padre).cambiaADetallesDevolucion(idDevolucion);
+            ((Devoluciones)padre).cambiaADetallesDevolucion(idVenta, idDevolucion);
         }
 
         private void modificaRegistroTablaDevolucion() {
             if (indiceFila != -1)
             {
-                DataGridViewRow fila = dataGridViewVentas.Rows[indiceFila];
+                DataGridViewRow fila = dataGridViewDevolucion.Rows[indiceFila];
                 string query = "UPDATE Almacen.Devolucion SET IdVenta = @venta, " +
                     "Motivo = @Motivo, Fecha = @fecha " +
                     "WHERE IdVenta = @idVenta;";
@@ -411,9 +412,8 @@ namespace VianneySQL
         private void eliminaRegistroTablaDevolucion() {
             if (indiceFila != -1)
             {
-                DataGridViewRow fila = dataGridViewVentas.Rows[indiceFila];
+                DataGridViewRow fila = dataGridViewDevolucion.Rows[indiceFila];
                 string idDevolucion = Convert.ToString(fila.Cells["idDevolucion"].Value);
-                eliminaTablaDetalleDevolucion(idDevolucion);
                 string query = "DELETE FROM Almacen.Devolucion WHERE idDevolucion = @idDevolucion;";
                 SqlCommand comando = new SqlCommand(query, conexion);
                 comando.Parameters.AddWithValue("@idDevolucion", idDevolucion);
@@ -429,20 +429,6 @@ namespace VianneySQL
             else
             {
                 MessageBox.Show("Selecciona una fila primero", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-        }
-
-        private void eliminaTablaDetalleDevolucion(string idDevolucion) {
-            string query = "DELETE FROM Almacen.DetalleDevolucion WHERE idDevolucion = @idDevolucion;";
-            SqlCommand comando = new SqlCommand(query, conexion);
-            comando.Parameters.AddWithValue("@idDevolucion", idDevolucion);
-            try
-            {
-                comando.ExecuteNonQuery();
-            }
-            catch (Exception error)
-            {
-                MessageBox.Show(error.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
     }
